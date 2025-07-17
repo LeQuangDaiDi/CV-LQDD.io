@@ -3,7 +3,7 @@ let isDarkMode = false;
 
 // CV Download URLs
 const cvUrls = {
-    vi: 'https://drive.google.com/file/d/1QncKhEIxA1t2N6IhATLouwNid8QBRkAX/view?usp=sharing',
+    vi: 'https://drive.google.com/file/d/1llEB7LThVNQG9oFtEeUAecJ2pc0LUoZc/view?usp=sharing',
     en: 'https://drive.google.com/file/d/1bct2aEJGpdQ2CokgOcsBUUfqPvRddEXK/view'
 };
 
