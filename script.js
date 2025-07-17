@@ -35,8 +35,8 @@ function toggleDropdown() {
     });
 }
 
-// Method 1: Using html2pdf.js with simplified version for PDF
-async function downloadPDF() {
+// Method 1: Using html2pdf.js with two versions
+async function downloadPDF(type = 'full') {
     const loading = document.getElementById('loadingIndicator');
     loading.classList.add('show');
     
@@ -46,13 +46,23 @@ async function downloadPDF() {
         const originalDisplay = controls.style.display;
         controls.style.display = 'none';
         
-        // Create simplified version for PDF
-        const simplifiedCV = createSimplifiedCV();
+        let element;
+        let filename;
+        
+        if (type === 'compact') {
+            // Create compact version
+            element = createCompactCV();
+            filename = `CV_LeQuangDaiDi_Compact_${currentLang.toUpperCase()}.pdf`;
+        } else {
+            // Use full version
+            element = createFullCV();
+            filename = `CV_LeQuangDaiDi_Full_${currentLang.toUpperCase()}.pdf`;
+        }
         
         // Configure PDF options
         const opt = {
             margin: [0.75, 0.75, 0.75, 0.75],
-            filename: `CV_Le_Quang_Dai_Di_${currentLang.toUpperCase()}.pdf`,
+            filename: filename,
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { 
                 scale: 2,
@@ -72,11 +82,11 @@ async function downloadPDF() {
             }
         };
 
-        // Generate PDF from simplified version
-        await html2pdf().set(opt).from(simplifiedCV).save();
+        // Generate PDF
+        await html2pdf().set(opt).from(element).save();
         
         // Clean up
-        document.body.removeChild(simplifiedCV);
+        document.body.removeChild(element);
         
         // Restore controls
         controls.style.display = originalDisplay;
@@ -90,12 +100,12 @@ async function downloadPDF() {
     }
 }
 
-// Create simplified CV version for PDF export
-function createSimplifiedCV() {
+// Create full CV version (original website content)
+function createFullCV() {
     const isVietnamese = currentLang === 'vi';
     
-    const simplifiedHTML = `
-        <div class="pdf-cv-container">
+    const fullHTML = `
+        <div class="pdf-cv-container full-version">
             <!-- Page 1 -->
             <div class="pdf-page">
                 <div class="pdf-header">
@@ -110,6 +120,414 @@ function createSimplifiedCV() {
                     <h3>${isVietnamese ? 'GIỚI THIỆU' : 'ABOUT ME'}</h3>
                     <p>${isVietnamese ? 
                         'Kỹ sư Bảo mật với nền tảng kỹ thuật vững chắc trong phát triển phần mềm backend và giám sát bảo mật hệ thống. Có kinh nghiệm trong phân tích sự cố thực tế, xây dựng hệ thống giám sát dựa trên SIEM, triển khai công cụ đánh giá lỗ hổng và tích hợp framework MITRE ATT&CK. Thành thạo trong thiết kế API, xử lý dữ liệu quy mô lớn và triển khai hệ thống phân tán trên AWS. Mục tiêu nghề nghiệp là trở thành một DevSecOps hoặc Kỹ sư Bảo mật có khả năng bảo vệ hệ thống từ tầng ứng dụng xuống tầng hạ tầng.' :
+                        'Security Engineer with a strong technical foundation in backend software development and system security monitoring. Experienced in real-world incident analysis, building SIEM-based monitoring systems, deploying vulnerability assessment tools, and integrating the MITRE ATT&CK framework. Proficient in designing APIs, handling large-scale data processing, and deploying distributed systems on AWS. Career objective is to become a DevSecOps or Security Engineer capable of securing systems from the application layer down to the infrastructure level.'
+                    }</p>
+                </div>
+
+                <div class="pdf-section">
+                    <h3>${isVietnamese ? 'KỸ NĂNG CHUYÊN MÔN' : 'TECHNICAL SKILLS'}</h3>
+                    <div class="pdf-skills">
+                        <div class="skill-row">
+                            <strong>${isVietnamese ? 'Lập trình & Phát triển:' : 'Programming & Development:'}</strong>
+                            Python, TypeScript, FastAPI, Django, Flask, Angular, MITRE ATT&CK®
+                        </div>
+                        <div class="skill-row">
+                            <strong>${isVietnamese ? 'Đám mây & DevOps:' : 'Cloud & DevOps:'}</strong>
+                            AWS (Lambda, API Gateway, CloudWatch), GitHub Actions (CI/CD), ${isVietnamese ? 'Tự động hóa triển khai AWS' : 'AWS deployment automation'}
+                        </div>
+                        <div class="skill-row">
+                            <strong>${isVietnamese ? 'Công cụ Bảo mật & Giám sát:' : 'Security Tools & Monitoring:'}</strong>
+                            OpenVAS, Splunk, Wazuh, Nmap
+                        </div>
+                        <div class="skill-row">
+                            <strong>${isVietnamese ? 'Cơ sở dữ liệu:' : 'Databases:'}</strong>
+                            SQL, MySQL, DynamoDB, DocumentDB, MongoDB
+                        </div>
+                        <div class="skill-row">
+                            <strong>${isVietnamese ? 'Khác:' : 'Others:'}</strong>
+                            Figma, Git
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pdf-section">
+                    <h3>${isVietnamese ? 'HỌC VẤN' : 'EDUCATION'}</h3>
+                    <div class="education-row">
+                        <strong>${isVietnamese ? 'Đại học Gia Định' : 'Gia Dinh University'}</strong>
+                        <span class="gpa">GPA: 3.5/4.0</span>
+                    </div>
+                </div>
+
+                <div class="pdf-section">
+                    <h3>${isVietnamese ? 'KINH NGHIỆM LÀM VIỆC' : 'EXPERIENCE'}</h3>
+                    
+                    <div class="experience-block">
+                        <div class="company-info">
+                            <strong>BaseBS (BASE BUSINESS SOLUTIONS CORPORATION)</strong>
+                            <span class="duration">${isVietnamese ? 'Tháng 5/2025 – Hiện tại' : 'May 2025 – Present'}</span>
+                        </div>
+                        <div class="project-info">
+                            <strong>${isVietnamese ? 'Dự án: uCRM (Quản lý Yêu cầu Khách hàng Thống nhất)' : 'Project: uCRM (Unify Customer Request Manage)'}</strong>
+                        </div>
+                        <div class="tech-info">
+                            <strong>${isVietnamese ? 'Công nghệ:' : 'Technologies:'}</strong> Python, Django, Redis, Celery, MongoDB
+                        </div>
+                        <ul class="responsibilities">
+                            <li>${isVietnamese ? 
+                                'Cung cấp hỗ trợ khắc phục các vấn đề chức năng và tối ưu hóa hiệu suất cho từng sản phẩm trên các agent khác nhau' :
+                                'Provided support in troubleshooting functional issues and optimizing performance for each product across different agents'
+                            }</li>
+                            <li>${isVietnamese ? 
+                                'Triển khai các biện pháp bảo mật: Kiểm soát truy cập, Bảo vệ dữ liệu, Thiết kế API an toàn' :
+                                'Implemented security measures: Access control, Data protection, Secure API design'
+                            }</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 2 - Full content continues... -->
+            <div class="pdf-page">
+                <!-- Rest of full content here -->
+            </div>
+        </div>
+    `;
+
+    const tempContainer = document.createElement('div');
+    tempContainer.innerHTML = fullHTML;
+    tempContainer.style.cssText = getPDFStyles();
+    tempContainer.style.position = 'absolute';
+    tempContainer.style.left = '-9999px';
+    tempContainer.style.top = '-9999px';
+    
+    document.body.appendChild(tempContainer);
+    return tempContainer;
+}
+
+// Create compact CV version (based on provided Word document)
+function createCompactCV() {
+    const isVietnamese = currentLang === 'vi';
+    
+    const compactHTML = `
+        <div class="pdf-cv-container compact-version">
+            <div class="pdf-page">
+                <div class="compact-header">
+                    <h1>Lê Quang Đại Dĩ</h1>
+                    <h2>${isVietnamese ? 
+                        'Kỹ sư Bảo mật | Cựu Chuyên viên SOC | Lập trình viên Backend' : 
+                        'Security Engineer | Former SOC Analyst | Backend Developer'
+                    }</h2>
+                    <div class="compact-contact">
+                        📞 0929860265 | 📧 dile8861@gmail.com
+                    </div>
+                </div>
+
+                <div class="compact-section">
+                    <h3>${isVietnamese ? 'TỔNG QUAN NGHỀ NGHIỆP' : 'CAREER OVERVIEW'}</h3>
+                    <p>${isVietnamese ? 
+                        'Kỹ sư bảo mật với nền tảng phát triển phần mềm backend mạnh mẽ, từng tham gia xây dựng hệ thống giám sát bảo mật (SIEM), tích hợp OpenVAS và Splunk, và xử lý sự cố thực tế. Dày dạn kinh nghiệm thiết kế hệ thống an toàn trên nền tảng AWS, triển khai CI/CD, và tối ưu vận hành. Mục tiêu hướng tới vị trí DevSecOps với khả năng bảo vệ hệ thống toàn diện từ tầng ứng dụng đến hạ tầng.' :
+                        'Security engineer with strong backend software development foundation, experienced in building security monitoring systems (SIEM), integrating OpenVAS and Splunk, and handling real-world incidents. Extensive experience in designing secure systems on AWS platform, deploying CI/CD, and optimizing operations. Aiming for DevSecOps position with comprehensive system protection capabilities from application layer to infrastructure.'
+                    }</p>
+                </div>
+
+                <div class="compact-section">
+                    <h3>${isVietnamese ? 'KỸ NĂNG CHUYÊN MÔN' : 'TECHNICAL SKILLS'}</h3>
+                    <ul class="compact-skills">
+                        <li><strong>${isVietnamese ? 'Ngôn ngữ lập trình:' : 'Programming Languages:'}</strong> Python, TypeScript</li>
+                        <li><strong>Framework:</strong> Django, FastAPI, Flask, Angular</li>
+                        <li><strong>Cloud & DevOps:</strong> AWS (Lambda, API Gateway, S3, CloudWatch), GitHub Actions (CI/CD)</li>
+                        <li><strong>${isVietnamese ? 'Bảo mật:' : 'Security:'}</strong> Splunk, OpenVAS, Wazuh, Nmap, MITRE ATT&CK</li>
+                        <li><strong>${isVietnamese ? 'Cơ sở dữ liệu:' : 'Databases:'}</strong> SQL, MySQL, MongoDB, DynamoDB, DocumentDB</li>
+                        <li><strong>${isVietnamese ? 'Khác:' : 'Others:'}</strong> Figma, Git, Postman, Pytest</li>
+                    </ul>
+                </div>
+
+                <div class="compact-section">
+                    <h3>${isVietnamese ? 'KINH NGHIỆM LÀM VIỆC' : 'WORK EXPERIENCE'}</h3>
+                    
+                    <div class="compact-job">
+                        <div class="job-header">
+                            <strong>BaseBS Corporation</strong>
+                            <span class="job-date">${isVietnamese ? '05/2025 -- Nay' : '05/2025 -- Present'}</span>
+                        </div>
+                        <ul class="job-details">
+                            <li>${isVietnamese ? 
+                                'Tối ưu hiệu suất và xử lý lỗi linh hoạt cho từng đại lý trong dự án uCRM.' :
+                                'Optimized performance and handled flexible error processing for each agent in uCRM project.'
+                            }</li>
+                            <li>${isVietnamese ? 
+                                'Tích hợp Celery, MongoDB, Redis phục vụ vận hành ổn định hệ thống.' :
+                                'Integrated Celery, MongoDB, Redis for stable system operations.'
+                            }</li>
+                            <li>${isVietnamese ? 
+                                'Áp dụng các chuẩn bảo mật: Access Control, Logging, Secure API Design.' :
+                                'Applied security standards: Access Control, Logging, Secure API Design.'
+                            }</li>
+                        </ul>
+                    </div>
+
+                    <div class="compact-job">
+                        <div class="job-header">
+                            <strong>FE Credit</strong>
+                            <span class="job-date">${isVietnamese ? '04/2024 -- 05/2025' : '04/2024 -- 05/2025'}</span>
+                        </div>
+                        <ul class="job-details">
+                            <li>${isVietnamese ? 
+                                'Phát triển cổng nội bộ kiểm thử & hệ thống xử lý nghiệp vụ trên production.' :
+                                'Developed internal testing portal & business processing system on production.'
+                            }</li>
+                            <li>${isVietnamese ? 
+                                'Triển khai hệ thống gửi thông báo cho 3 triệu khách hàng theo logic động.' :
+                                'Deployed notification system for 3 million customers with dynamic logic.'
+                            }</li>
+                            <li>${isVietnamese ? 
+                                'Thiết kế API đăng ký khách hàng (onboarding), xác thực định danh, kiểm thử logic.' :
+                                'Designed customer registration API (onboarding), identity verification, logic testing.'
+                            }</li>
+                            <li>${isVietnamese ? 
+                                'Vận hành hệ thống trên AWS với Lambda, S3, SQS, DynamoDB, CloudWatch.' :
+                                'Operated system on AWS with Lambda, S3, SQS, DynamoDB, CloudWatch.'
+                            }</li>
+                        </ul>
+                    </div>
+
+                    <div class="compact-job">
+                        <div class="job-header">
+                            <strong>HTC Global Solutions</strong>
+                            <span class="job-date">${isVietnamese ? '04/2023 -- 01/2024' : '04/2023 -- 01/2024'}</span>
+                        </div>
+                        <ul class="job-details">
+                            <li>${isVietnamese ? 
+                                'Tích hợp OpenVAS với Splunk để thu thập, phân tích lỗ hổng và phát cảnh báo.' :
+                                'Integrated OpenVAS with Splunk for vulnerability collection, analysis and alerting.'
+                            }</li>
+                            <li>${isVietnamese ? 
+                                'Xây dựng hệ thống giám sát đáp ứng chỉ thị 2973/BTTTT -- phát hiện 10 loại tấn công.' :
+                                'Built monitoring system complying with directive 2973/BTTTT -- detecting 10 attack types.'
+                            }</li>
+                            <li>${isVietnamese ? 
+                                'Thiết kế dashboard, luồng xử lý cảnh báo & báo cáo an ninh thời gian thực.' :
+                                'Designed dashboard, alert processing flows & real-time security reporting.'
+                            }</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="compact-section">
+                    <h3>${isVietnamese ? 'DỰ ÁN & THÀNH TỰU BẢO MẬT' : 'SECURITY PROJECTS & ACHIEVEMENTS'}</h3>
+                    <ul class="security-achievements">
+                        <li>${isVietnamese ? 
+                            'Thiết lập Security Headers (HSTS, X-Content-Type-Options, etc).' :
+                            'Established Security Headers (HSTS, X-Content-Type-Options, etc).'
+                        }</li>
+                        <li>${isVietnamese ? 
+                            'Tắt lộ thông tin phiên bản, cấu trúc URL an toàn, chặn truy cập trái phép.' :
+                            'Disabled version disclosure, secure URL structure, blocked unauthorized access.'
+                        }</li>
+                        <li>${isVietnamese ? 
+                            'Thực hiện kiểm tra dependency/lỗ hổng, xác thực & phân quyền bảo mật API.' :
+                            'Performed dependency/vulnerability checks, API authentication & authorization security.'
+                        }</li>
+                        <li>${isVietnamese ? 
+                            'Triển khai giám sát hoạt động và alert theo thời gian thực qua CloudWatch, Splunk.' :
+                            'Deployed activity monitoring and real-time alerts via CloudWatch, Splunk.'
+                        }</li>
+                    </ul>
+                </div>
+
+                <div class="compact-section">
+                    <h3>${isVietnamese ? 'HỌC VẤN' : 'EDUCATION'}</h3>
+                    <div class="education-info">
+                        <strong>${isVietnamese ? 'Đại học Gia Định' : 'Gia Dinh University'}</strong> -- ${isVietnamese ? 'Chuyên ngành CNTT' : 'IT Major'} | GPA: 3.5 / 4.0
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    const tempContainer = document.createElement('div');
+    tempContainer.innerHTML = compactHTML;
+    tempContainer.style.cssText = getCompactPDFStyles();
+    tempContainer.style.position = 'absolute';
+    tempContainer.style.left = '-9999px';
+    tempContainer.style.top = '-9999px';
+    
+    document.body.appendChild(tempContainer);
+    return tempContainer;
+}
+
+// Get compact PDF styles
+function getCompactPDFStyles() {
+    return `
+        font-family: Arial, sans-serif;
+        line-height: 1.4;
+        color: #000;
+        background: white;
+    `;
+}
+
+// Add compact PDF-specific styles to document head
+function addCompactPDFStyles() {
+    if (document.getElementById('compact-pdf-styles')) return;
+    
+    const style = document.createElement('style');
+    style.id = 'compact-pdf-styles';
+    style.textContent = `
+        .compact-version {
+            font-family: Arial, sans-serif;
+            line-height: 1.4;
+            color: #000;
+            background: white;
+        }
+        
+        .compact-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #000;
+        }
+        
+        .compact-header h1 {
+            font-size: 26px;
+            font-weight: bold;
+            margin: 0 0 8px 0;
+            color: #000;
+        }
+        
+        .compact-header h2 {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0 0 12px 0;
+            color: #000;
+        }
+        
+        .compact-contact {
+            font-size: 13px;
+            color: #333;
+        }
+        
+        .compact-section {
+            margin-bottom: 20px;
+        }
+        
+        .compact-section h3 {
+            font-size: 14px;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            color: #000;
+            text-transform: uppercase;
+            background: #f0f0f0;
+            padding: 8px;
+            border-left: 4px solid #000;
+        }
+        
+        .compact-section p {
+            font-size: 11px;
+            text-align: justify;
+            margin: 0 0 10px 0;
+            line-height: 1.5;
+        }
+        
+        .compact-skills {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .compact-skills li {
+            font-size: 11px;
+            margin-bottom: 5px;
+            padding-left: 8px;
+            position: relative;
+        }
+        
+        .compact-skills li:before {
+            content: "•";
+            color: #000;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .compact-job {
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+        
+        .job-date {
+            font-style: italic;
+            color: #666;
+            font-size: 11px;
+        }
+        
+        .job-details {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .job-details li {
+            font-size: 11px;
+            margin-bottom: 4px;
+            padding-left: 12px;
+            position: relative;
+            line-height: 1.4;
+        }
+        
+        .job-details li:before {
+            content: "-";
+            color: #000;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .security-achievements {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .security-achievements li {
+            font-size: 11px;
+            margin-bottom: 5px;
+            padding-left: 12px;
+            position: relative;
+            line-height: 1.4;
+        }
+        
+        .security-achievements li:before {
+            content: "-";
+            color: #000;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .education-info {
+            font-size: 11px;
+            line-height: 1.5;
+        }
+        
+        @media print {
+            .compact-version .pdf-page {
+                margin: 0;
+                padding: 15mm;
+            }
+        }
+    `;
+    
+    document.head.appendChild(style);
+}ần mềm backend và giám sát bảo mật hệ thống. Có kinh nghiệm trong phân tích sự cố thực tế, xây dựng hệ thống giám sát dựa trên SIEM, triển khai công cụ đánh giá lỗ hổng và tích hợp framework MITRE ATT&CK. Thành thạo trong thiết kế API, xử lý dữ liệu quy mô lớn và triển khai hệ thống phân tán trên AWS. Mục tiêu nghề nghiệp là trở thành một DevSecOps hoặc Kỹ sư Bảo mật có khả năng bảo vệ hệ thống từ tầng ứng dụng xuống tầng hạ tầng.' :
                         'Security Engineer with a strong technical foundation in backend software development and system security monitoring. Experienced in real-world incident analysis, building SIEM-based monitoring systems, deploying vulnerability assessment tools, and integrating the MITRE ATT&CK framework. Proficient in designing APIs, handling large-scale data processing, and deploying distributed systems on AWS. Career objective is to become a DevSecOps or Security Engineer capable of securing systems from the application layer down to the infrastructure level.'
                     }</p>
                 </div>
