@@ -145,13 +145,14 @@ body {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     overflow: visible;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
+    min-height: auto;
 }
 
 .page {
     width: 100%;
     min-height: auto;
-    padding: 40px;
+    padding: 40px 40px 60px 40px;
     position: relative;
     overflow: visible;
 }
@@ -159,6 +160,7 @@ body {
 .page:last-child {
     page-break-after: avoid;
     min-height: auto;
+    padding-bottom: 40px;
 }
 
 .header {
@@ -330,12 +332,13 @@ body {
 }
 
 .experience-item {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     background: white;
     border-radius: 16px;
     border: 1px solid #e2e8f0;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
+    overflow: visible;
 }
 
 .experience-item:hover {
@@ -344,7 +347,7 @@ body {
 }
 
 .experience-item:last-child {
-    margin-bottom: 0;
+    margin-bottom: 20px;
 }
 
 .company-header {
@@ -444,7 +447,7 @@ body {
     font-weight: 600;
     color: #2d3748;
     margin-bottom: 15px;
-    margin-top: 20px;
+    margin-top: 25px;
     padding: 10px 0;
     border-bottom: 1px solid #e2e8f0;
 }
@@ -512,7 +515,8 @@ body {
     background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%);
     padding: 20px;
     border-radius: 12px;
-    margin-top: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     border-left: 4px solid #38b2ac;
     word-wrap: break-word;
     overflow-wrap: break-word;
@@ -539,7 +543,7 @@ body {
     gap: 12px;
     font-size: 11px;
     margin-top: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .security-item {
