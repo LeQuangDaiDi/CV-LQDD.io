@@ -183,7 +183,7 @@ function createExperienceSection(section) {
         
         const headerDiv = document.createElement('div');
         headerDiv.className = 'company-header';
-        headerDiv.onclick = () => toggleExperienceContent(index);
+        // Remove onclick from header - only button should trigger collapse
         
         headerDiv.innerHTML = `
             <div class="company-header-left">
@@ -204,6 +204,16 @@ function createExperienceSection(section) {
                 </button>
             </div>
         `;
+        
+        // Add click event only to toggle button, not the entire header
+        const toggleBtn = headerDiv.querySelector('.collapse-toggle');
+        toggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleExperienceContent(index);
+        });
+        
+        // Remove onclick from header
+        headerDiv.onclick = null;
         itemDiv.appendChild(headerDiv);
         
         const contentDiv = document.createElement('div');
@@ -360,12 +370,6 @@ function downloadMainCV(language) {
     document.querySelector('.download-dropdown').classList.remove('active');
 }
 
-// Toggle dropdown menu - REMOVED (not needed for company headers anymore)
-function toggleDropdown(event, index) {
-    // This function is no longer needed
-    return;
-}
-
 // Close dropdown when clicking outside
 document.addEventListener('click', function(event) {
     if (!event.target.closest('.download-dropdown')) {
@@ -376,6 +380,10 @@ document.addEventListener('click', function(event) {
         if (dropdownContainer) dropdownContainer.classList.remove('active');
     }
 });
+
+// Remove unused functions
+// downloadCompanyCV - no longer needed  
+// downloadCV - no longer needed (replaced by dropdown)
 
 // Toggle experience content
 function toggleExperienceContent(index) {
@@ -408,16 +416,7 @@ function toggleExperienceContent(index) {
 }
 
 // Download company-specific CV - REMOVED (not needed anymore)
-function downloadCompanyCV(event, companyName, language) {
-    // This function is no longer needed
-    return;
-}
-
 // Download CV (main button) - REMOVED (replaced by dropdown)
-function downloadCV() {
-    // This function is no longer needed - replaced by dropdown
-    return;
-}
 
 // Show notification
 function showNotification(message) {

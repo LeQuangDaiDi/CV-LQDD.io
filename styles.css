@@ -149,7 +149,7 @@ body {
 
 .page {
     width: 100%;
-    min-height: 297mm;
+    min-height: auto;
     padding: 40px;
     page-break-after: always;
     position: relative;
@@ -157,6 +157,7 @@ body {
 
 .page:last-child {
     page-break-after: avoid;
+    min-height: auto;
 }
 
 .header {
@@ -327,7 +328,7 @@ body {
     background: white;
     border-radius: 16px;
     border: 1px solid #e2e8f0;
-    overflow: hidden;
+    overflow: visible;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
 }
@@ -335,6 +336,10 @@ body {
 .experience-item:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.experience-item:last-child {
+    margin-bottom: 0;
 }
 
 .company-header {
@@ -404,46 +409,17 @@ body {
     transform: rotate(-90deg);
 }
 
+/* Remove unused download button styles */
 .download-buttons {
-    display: flex;
-    gap: 8px;
+    display: none;
 }
 
 .download-btn-main {
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 12px;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.download-btn-main:hover {
-    background: rgba(255, 255, 255, 0.3);
+    display: none;
 }
 
 .download-btn-small {
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: white;
-    padding: 6px 10px;
-    border-radius: 15px;
-    cursor: pointer;
-    font-size: 10px;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.download-btn-small:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: translateY(-1px);
+    display: none;
 }
 
 .experience-content {
@@ -704,6 +680,28 @@ body[data-lang="en"] .lang-vi {
     }
     
     @media (max-width: 768px) {
+        .cv-container {
+            margin: 100px 10px 20px;
+        }
+        
+        .page {
+            padding: 20px;
+        }
+        
+        .contact-info {
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .skills-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .controls {
+            flex-direction: column;
+            gap: 8px;
+        }
+        
         .company-header {
             flex-direction: column;
             gap: 15px;
@@ -715,13 +713,7 @@ body[data-lang="en"] .lang-vi {
         }
         
         .company-header-right {
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .download-buttons {
-            flex-direction: row;
-            gap: 8px;
+            justify-content: center;
         }
     }
 }
