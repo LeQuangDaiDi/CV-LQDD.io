@@ -333,31 +333,10 @@ function toggleMainDropdown(event) {
     }
 }
 
-// Download main CV
+// Download main CV - Updated to use PDF generation
 function downloadMainCV(language) {
-    if (!cvData || !cvData.downloadUrls) {
-        alert('Download links not available');
-        return;
-    }
-    
-    const url = cvData.downloadUrls[language];
-    if (url) {
-        window.open(url, '_blank');
-        
-        // Show success notification
-        const message = language === 'en' ? 
-            '✓ Opening CV (English)...' : 
-            '✓ Đang mở CV (Tiếng Việt)...';
-        showNotification(message);
-    } else {
-        alert(`Download link not available for ${language.toUpperCase()}`);
-    }
-    
-    // Close dropdown
-    const dropdown = document.getElementById('main-dropdown');
-    const dropdownContainer = document.querySelector('.download-dropdown');
-    if (dropdown) dropdown.classList.remove('show');
-    if (dropdownContainer) dropdownContainer.classList.remove('active');
+    // Call PDF generation function instead of opening links
+    downloadPDF(language);
 }
 
 // Toggle experience content
@@ -503,6 +482,7 @@ function addKeyboardShortcuts() {
                 case 'd':
                 case 'D':
                     e.preventDefault();
+                    // Open dropdown instead of direct download
                     toggleMainDropdown(e);
                     break;
             }

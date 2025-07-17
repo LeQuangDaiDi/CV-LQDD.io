@@ -225,6 +225,12 @@ function downloadPDF(language = 'en') {
     
     doc.save(fileName);
     
+    // Close dropdown after download
+    const dropdown = document.getElementById('main-dropdown');
+    const dropdownContainer = document.querySelector('.download-dropdown');
+    if (dropdown) dropdown.classList.remove('show');
+    if (dropdownContainer) dropdownContainer.classList.remove('active');
+    
     // Show success notification
     showNotification(
         language === 'en' ? 
