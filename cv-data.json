@@ -26,9 +26,6 @@
   "pages": [
     {
       "sections": ["about", "skills", "education", "experience"]
-    },
-    {
-      "sections": ["experience"]
     }
   ],
   "sections": {

@@ -282,11 +282,30 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.company-header:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+}
+
+.company-header-left {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.company-header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .company-name {
     font-size: 16px;
     font-weight: 600;
+    margin-bottom: 5px;
 }
 
 .duration {
@@ -294,10 +313,69 @@ body {
     background: rgba(255, 255, 255, 0.2);
     padding: 6px 12px;
     border-radius: 20px;
+    width: fit-content;
+}
+
+.collapse-toggle {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.collapse-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.collapse-icon {
+    transition: transform 0.3s ease;
+}
+
+.collapse-toggle.collapsed .collapse-icon {
+    transform: rotate(-90deg);
+}
+
+.download-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.download-btn-small {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 10px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.download-btn-small:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
 }
 
 .experience-content {
     padding: 25px;
+    max-height: 1000px;
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+
+.experience-content.collapsed {
+    max-height: 0;
+    padding: 0 25px;
 }
 
 .project-title {
@@ -543,9 +621,25 @@ body[data-lang="en"] .lang-vi {
         gap: 8px;
     }
     
-    .company-header {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
+    @media (max-width: 768px) {
+        .company-header {
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+        }
+        
+        .company-header-left {
+            align-items: center;
+        }
+        
+        .company-header-right {
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .download-buttons {
+            flex-direction: row;
+            gap: 8px;
+        }
     }
 }
