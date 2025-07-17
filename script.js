@@ -1,5 +1,4 @@
 let currentLang = 'en';
-let isDarkMode = false;
 let cvData = null;
 
 // Load CV data from JSON
@@ -29,6 +28,7 @@ async function loadCVData() {
 
 // Get text based on current language
 function getText(textObject) {
+    if (typeof textObject === 'string') return textObject;
     return textObject[currentLang] || textObject.en || textObject.vi || '';
 }
 
@@ -183,7 +183,6 @@ function createExperienceSection(section) {
         
         const headerDiv = document.createElement('div');
         headerDiv.className = 'company-header';
-        // Remove onclick from header - only button should trigger collapse
         
         headerDiv.innerHTML = `
             <div class="company-header-left">
@@ -191,6 +190,12 @@ function createExperienceSection(section) {
                     <span class="lang-en">${item.company.en}</span>
                     <span class="lang-vi">${item.company.vi}</span>
                 </div>
+                ${item.position ? `
+                    <div class="position" style="font-size: 13px; color: rgba(255, 255, 255, 0.9); margin-bottom: 5px;">
+                        <span class="lang-en">${item.position.en}</span>
+                        <span class="lang-vi">${item.position.vi}</span>
+                    </div>
+                ` : ''}
                 <div class="duration">
                     <span class="lang-en">${item.duration.en}</span>
                     <span class="lang-vi">${item.duration.vi}</span>
@@ -205,15 +210,13 @@ function createExperienceSection(section) {
             </div>
         `;
         
-        // Add click event only to toggle button, not the entire header
+        // Add click event only to toggle button
         const toggleBtn = headerDiv.querySelector('.collapse-toggle');
         toggleBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             toggleExperienceContent(index);
         });
         
-        // Remove onclick from header
-        headerDiv.onclick = null;
         itemDiv.appendChild(headerDiv);
         
         const contentDiv = document.createElement('div');
@@ -221,7 +224,7 @@ function createExperienceSection(section) {
         contentDiv.id = `content-${index}`;
         
         // Add projects
-        if (item.projects) {
+        if (item.projects && item.projects.length > 0) {
             item.projects.forEach(project => {
                 const projectDiv = document.createElement('div');
                 projectDiv.innerHTML = `
@@ -229,14 +232,16 @@ function createExperienceSection(section) {
                         <span class="lang-en">${project.title.en}</span>
                         <span class="lang-vi">${project.title.vi}</span>
                     </div>
-                    <div class="project-overview">
-                        <strong>
-                            <span class="lang-en">Overview:</span>
-                            <span class="lang-vi">Tổng quan:</span>
-                        </strong>
-                        <span class="lang-en">${project.overview.en}</span>
-                        <span class="lang-vi">${project.overview.vi}</span>
-                    </div>
+                    ${project.overview ? `
+                        <div class="project-overview">
+                            <strong>
+                                <span class="lang-en">Overview:</span>
+                                <span class="lang-vi">Tổng quan:</span>
+                            </strong>
+                            <span class="lang-en">${project.overview.en}</span>
+                            <span class="lang-vi">${project.overview.vi}</span>
+                        </div>
+                    ` : ''}
                     ${project.technologies ? `
                         <div class="tech-used">
                             <span class="tech-label">
@@ -247,7 +252,7 @@ function createExperienceSection(section) {
                             <span class="lang-vi">${project.technologies.vi}</span>
                         </div>
                     ` : ''}
-                    ${project.responsibilities ? `
+                    ${project.responsibilities && project.responsibilities.length > 0 ? `
                         <div class="responsibilities">
                             <div class="resp-title">
                                 <span class="lang-en">Responsibilities:</span>
@@ -263,19 +268,7 @@ function createExperienceSection(section) {
                             </div>
                         </div>
                     ` : ''}
-                    ${project.achievements ? `
-                        <div class="achievements">
-                            <div class="achievement-title">
-                                <span class="lang-en">Key Achievements:</span>
-                                <span class="lang-vi">Thành tựu chính:</span>
-                            </div>
-                            <div class="achievement-list">
-                                <span class="lang-en">${project.achievements.en}</span>
-                                <span class="lang-vi">${project.achievements.vi}</span>
-                            </div>
-                        </div>
-                    ` : ''}
-                    ${project.security ? `
+                    ${project.security && project.security.length > 0 ? `
                         <div class="responsibilities">
                             <div class="resp-title">
                                 <span class="lang-en">Security:</span>
@@ -288,6 +281,18 @@ function createExperienceSection(section) {
                                         <span class="lang-vi">${item.vi}</span>
                                     </div>
                                 `).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+                    ${project.achievements ? `
+                        <div class="achievements">
+                            <div class="achievement-title">
+                                <span class="lang-en">Key Achievements:</span>
+                                <span class="lang-vi">Thành tựu chính:</span>
+                            </div>
+                            <div class="achievement-list">
+                                <span class="lang-en">${project.achievements.en}</span>
+                                <span class="lang-vi">${project.achievements.vi}</span>
                             </div>
                         </div>
                     ` : ''}
@@ -315,25 +320,6 @@ function createDefaultSection(section) {
     return defaultDiv;
 }
 
-// Toggle language
-function toggleLanguage() {
-    currentLang = currentLang === 'en' ? 'vi' : 'en';
-    document.body.setAttribute('data-lang', currentLang);
-    
-    const button = document.querySelector('.language-toggle');
-    if (currentLang === 'en') {
-        button.innerHTML = '🇻🇳 Tiếng Việt';
-    } else {
-        button.innerHTML = '🇺🇸 English';
-    }
-}
-
-// Toggle theme - DISABLED
-function toggleTheme() {
-    // Dark mode disabled
-    return;
-}
-
 // Toggle main dropdown menu
 function toggleMainDropdown(event) {
     event.stopPropagation();
@@ -341,8 +327,10 @@ function toggleMainDropdown(event) {
     const dropdown = document.getElementById('main-dropdown');
     const dropdownContainer = document.querySelector('.download-dropdown');
     
-    dropdown.classList.toggle('show');
-    dropdownContainer.classList.toggle('active');
+    if (dropdown && dropdownContainer) {
+        dropdown.classList.toggle('show');
+        dropdownContainer.classList.toggle('active');
+    }
 }
 
 // Download main CV
@@ -366,24 +354,11 @@ function downloadMainCV(language) {
     }
     
     // Close dropdown
-    document.getElementById('main-dropdown').classList.remove('show');
-    document.querySelector('.download-dropdown').classList.remove('active');
+    const dropdown = document.getElementById('main-dropdown');
+    const dropdownContainer = document.querySelector('.download-dropdown');
+    if (dropdown) dropdown.classList.remove('show');
+    if (dropdownContainer) dropdownContainer.classList.remove('active');
 }
-
-// Close dropdown when clicking outside
-document.addEventListener('click', function(event) {
-    if (!event.target.closest('.download-dropdown')) {
-        const dropdown = document.getElementById('main-dropdown');
-        const dropdownContainer = document.querySelector('.download-dropdown');
-        
-        if (dropdown) dropdown.classList.remove('show');
-        if (dropdownContainer) dropdownContainer.classList.remove('active');
-    }
-});
-
-// Remove unused functions
-// downloadCompanyCV - no longer needed  
-// downloadCV - no longer needed (replaced by dropdown)
 
 // Toggle experience content
 function toggleExperienceContent(index) {
@@ -415,8 +390,20 @@ function toggleExperienceContent(index) {
     }
 }
 
-// Download company-specific CV - REMOVED (not needed anymore)
-// Download CV (main button) - REMOVED (replaced by dropdown)
+// Toggle language
+function toggleLanguage() {
+    currentLang = currentLang === 'en' ? 'vi' : 'en';
+    document.body.setAttribute('data-lang', currentLang);
+    
+    const button = document.querySelector('.language-toggle');
+    if (button) {
+        if (currentLang === 'en') {
+            button.innerHTML = '🇻🇳 Tiếng Việt';
+        } else {
+            button.innerHTML = '🇺🇸 English';
+        }
+    }
+}
 
 // Show notification
 function showNotification(message) {
@@ -478,7 +465,7 @@ function addAnimations() {
 
 // Add button hover effects
 function addButtonEffects() {
-    const buttons = document.querySelectorAll('.download-btn, .language-toggle, .theme-toggle');
+    const buttons = document.querySelectorAll('.download-btn, .language-toggle');
     buttons.forEach(button => {
         button.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-2px) scale(1.02)';
@@ -513,10 +500,6 @@ function addKeyboardShortcuts() {
                     e.preventDefault();
                     toggleLanguage();
                     break;
-                case 't':
-                case 'T':
-                    // Dark mode disabled
-                    break;
                 case 'd':
                 case 'D':
                     e.preventDefault();
@@ -527,28 +510,44 @@ function addKeyboardShortcuts() {
     });
 }
 
+// Close dropdown when clicking outside
+function addDropdownHandler() {
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.download-dropdown')) {
+            const dropdown = document.getElementById('main-dropdown');
+            const dropdownContainer = document.querySelector('.download-dropdown');
+            
+            if (dropdown) dropdown.classList.remove('show');
+            if (dropdownContainer) dropdownContainer.classList.remove('active');
+        }
+    });
+}
+
 // Add print handlers
 function addPrintHandlers() {
     window.addEventListener('beforeprint', function() {
         document.body.classList.add('printing');
-        document.querySelector('.controls').style.display = 'none';
+        const controls = document.querySelector('.controls');
+        if (controls) controls.style.display = 'none';
     });
 
     window.addEventListener('afterprint', function() {
         document.body.classList.remove('printing');
-        document.querySelector('.controls').style.display = 'flex';
+        const controls = document.querySelector('.controls');
+        if (controls) controls.style.display = 'flex';
     });
 }
 
 // Add responsive handlers
 function addResponsiveHandlers() {
     function handleResize() {
-        if (window.innerWidth <= 768) {
-            const controls = document.querySelector('.controls');
-            controls.classList.add('mobile-controls');
-        } else {
-            const controls = document.querySelector('.controls');
-            controls.classList.remove('mobile-controls');
+        const controls = document.querySelector('.controls');
+        if (controls) {
+            if (window.innerWidth <= 768) {
+                controls.classList.add('mobile-controls');
+            } else {
+                controls.classList.remove('mobile-controls');
+            }
         }
     }
 
@@ -634,25 +633,16 @@ function addPreload() {
     document.head.appendChild(link);
 }
 
-// Add service worker for offline capability
-function addServiceWorker() {
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js').catch(function(error) {
-            console.log('ServiceWorker registration failed: ', error);
-        });
-    }
-}
-
 // Initialize everything
 function init() {
     loadCVData();
     addLoadingAnimation();
     addKeyboardShortcuts();
+    addDropdownHandler();
     addPrintHandlers();
     addResponsiveHandlers();
     addErrorHandling();
     addPreload();
-    addServiceWorker();
     
     // Add other features after content is loaded
     setTimeout(() => {

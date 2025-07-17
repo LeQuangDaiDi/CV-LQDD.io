@@ -1,8 +1,8 @@
 {
   "personal": {
     "name": {
-      "en": "LE QUANG DAI DI",
-      "vi": "LÊ QUANG ĐẠI DĨ"
+      "en": "Lê Quang Đại Dĩ",
+      "vi": "Lê Quang Đại Dĩ"
     },
     "title": {
       "en": "SECURITY ENGINEER | FORMER SOC ANALYST | BACKEND DEVELOPER",
@@ -120,202 +120,272 @@
       "items": [
         {
           "company": {
-            "en": "BaseBS (BASE BUSINESS SOLUTIONS CORPORATION)",
-            "vi": "BaseBS (BASE BUSINESS SOLUTIONS CORPORATION)"
+            "en": "BaseBS (Base Business Solutions Corporation)",
+            "vi": "BaseBS (Base Business Solutions Corporation)"
+          },
+          "position": {
+            "en": "Backend Developer",
+            "vi": "Backend Developer"
           },
           "duration": {
             "en": "May 2025 – Present",
-            "vi": "Tháng 5/2025 – Hiện tại"
+            "vi": "05/2025 – Nay"
           },
           "projects": [
             {
               "title": {
-                "en": "Project: uCRM (Unify Customer Request Manage)",
-                "vi": "Dự án: uCRM (Quản lý Yêu cầu Khách hàng Thống nhất)"
-              },
-              "overview": {
-                "en": "Provided support for bug fixes and performance optimization of core features.",
-                "vi": "Cung cấp hỗ trợ sửa lỗi và tối ưu hóa hiệu suất cho các tính năng cốt lõi."
+                "en": "Project: uCRM – Customer Request Management System",
+                "vi": "Dự án: uCRM – Hệ thống quản lý yêu cầu khách hàng"
               },
               "technologies": {
-                "en": "Back-end: Python | Framework: Django | Services: Redis, Celery, MongoDB",
-                "vi": "Back-end: Python | Framework: Django | Dịch vụ: Redis, Celery, MongoDB"
+                "en": "Technologies: Python, Django, Redis, Celery, MongoDB",
+                "vi": "Công nghệ: Python, Django, Redis, Celery, MongoDB"
               },
               "responsibilities": [
                 {
-                  "en": "Provided support in troubleshooting functional issues and optimizing performance for each product across different agents, tailored to the specific usage needs and priorities of each agent.",
-                  "vi": "Cung cấp hỗ trợ khắc phục các vấn đề chức năng và tối ưu hóa hiệu suất cho từng sản phẩm trên các agent khác nhau, được điều chỉnh theo nhu cầu sử dụng cụ thể và ưu tiên của từng agent."
+                  "en": "Optimize and maintain core features on each agent according to specific usage characteristics.",
+                  "vi": "Tối ưu và bảo trì các tính năng cốt lõi trên từng agent theo đặc thù sử dụng riêng."
                 }
               ],
               "security": [
                 {
-                  "en": "Access Control for Internal Services",
-                  "vi": "Kiểm soát Truy cập Dịch vụ Nội bộ"
+                  "en": "Internal Service Access Control",
+                  "vi": "Kiểm soát truy cập dịch vụ nội bộ"
                 },
                 {
-                  "en": "Data Protection",
-                  "vi": "Bảo vệ Dữ liệu"
+                  "en": "Data Protection & Monitoring",
+                  "vi": "Bảo vệ dữ liệu & giám sát"
                 },
                 {
-                  "en": "Logging & Monitoring",
-                  "vi": "Ghi nhật ký & Giám sát"
-                },
-                {
-                  "en": "Secure API Design",
-                  "vi": "Thiết kế API An toàn"
-                },
-                {
-                  "en": "Input Validation & Output Encoding",
-                  "vi": "Xác thực Đầu vào & Mã hóa Đầu ra"
+                  "en": "Secure API Design & Input Validation",
+                  "vi": "Thiết kế API an toàn & xác thực đầu vào"
                 }
               ],
               "achievements": {
-                "en": "Ensured stable operations and optimized performance of each product across individual agents, delivering tangible and positive benefits tailored to their specific needs.",
-                "vi": "Đảm bảo hoạt động ổn định và tối ưu hóa hiệu suất của từng sản phẩm trên các agent riêng lẻ, mang lại lợi ích tích cực và hữu hình phù hợp với nhu cầu cụ thể của họ."
+                "en": "Optimized performance and ensured stable operation for each product.",
+                "vi": "Tối ưu hiệu suất và đảm bảo hoạt động ổn định cho từng sản phẩm."
               }
             }
           ]
         },
         {
           "company": {
-            "en": "FECredit (Công ty Tài chính TNHH Ngân hàng Việt Nam Thịnh Vượng SMBC)",
-            "vi": "FECredit (Công ty Tài chính TNHH Ngân hàng Việt Nam Thịnh Vượng SMBC)"
+            "en": "FECredit (Vietnam Prosperity Commercial Joint Stock Bank SMBC)",
+            "vi": "FECredit (Ngân hàng Việt Nam Thịnh Vượng SMBC)"
+          },
+          "position": {
+            "en": "Backend Engineer",
+            "vi": "Backend Engineer"
           },
           "duration": {
             "en": "April 2024 – May 2025",
-            "vi": "Tháng 4/2024 – Tháng 5/2025"
+            "vi": "04/2024 – 05/2025"
           },
           "projects": [
             {
               "title": {
-                "en": "Project: Portal",
-                "vi": "Dự án: Portal"
-              },
-              "overview": {
-                "en": "A dual-environment portal system (Internal Support & Production Support) designed to support internal operations and handle exception cases in the production environment.",
-                "vi": "Hệ thống portal hai môi trường (Hỗ trợ Nội bộ & Hỗ trợ Sản xuất) được thiết kế để hỗ trợ các hoạt động nội bộ và xử lý các trường hợp ngoại lệ trong môi trường sản xuất."
+                "en": "Project: Portal – Internal Support System & Production Business Processing",
+                "vi": "Dự án: Portal – Hệ thống hỗ trợ nội bộ & xử lý nghiệp vụ sản xuất"
               },
               "technologies": {
-                "en": "Front-end: Angular | Back-end: AWS(Python) | AWS Services: API Gateway, Lambda, S3, Secret Manager, SQS, CloudWatch, DynamoDB, DocumentDB, MySQL | Others: AWS Power Tools, GitHub Actions (CI/CD), Figma",
-                "vi": "Front-end: Angular | Back-end: AWS(Python) | Dịch vụ AWS: API Gateway, Lambda, S3, Secret Manager, SQS, CloudWatch, DynamoDB, DocumentDB, MySQL | Khác: AWS Power Tools, GitHub Actions (CI/CD), Figma"
+                "en": "Technologies: AWS",
+                "vi": "Công nghệ: AWS"
               },
               "responsibilities": [
                 {
-                  "en": "Internal Environment: Designed and maintained an internal testing portal for QA/QC teams to simulate user flows before production deployment, based on pre-defined business rules.",
-                  "vi": "Môi trường Nội bộ: Thiết kế và duy trì portal kiểm thử nội bộ cho các đội QA/QC để mô phỏng luồng người dùng trước khi triển khai sản xuất, dựa trên các quy tắc kinh doanh được định nghĩa trước."
+                  "en": "Built and developed testing environment for QA/QC",
+                  "vi": "Xây dựng và phát triển môi trường kiểm thử cho QA/QC"
                 },
                 {
-                  "en": "Production Environment: Handled exception-based business logic triggered by JIRA tickets.",
-                  "vi": "Môi trường Sản xuất: Xử lý logic kinh doanh dựa trên ngoại lệ được kích hoạt bởi các ticket JIRA."
+                  "en": "Built and developed business support environment from third parties",
+                  "vi": "Xây dựng và phát triển môi trường hỗ trợ nghiệp vụ từ bên thứ 3"
                 },
                 {
-                  "en": "Implemented large-scale notification systems for up to 3 million customers based on dynamic business criteria.",
-                  "vi": "Triển khai hệ thống thông báo quy mô lớn cho tới 3 triệu khách hàng dựa trên các tiêu chí kinh doanh động."
+                  "en": "Built and developed end-customer support environment for system error issues",
+                  "vi": "Xây dựng và phát triển môi trường hỗ trợ khách hàng đầu cuối từ các vấn đề lỗi hệ thống"
+                },
+                {
+                  "en": "Optimized and maintained periodic maintenance to ensure portal system stability",
+                  "vi": "Tối ưu và bảo trì định kì đảm bảo hệ thống portal"
+                }
+              ],
+              "security": [
+                {
+                  "en": "Security Headers, DDoS/DoS Protection, System Info Hiding",
+                  "vi": "Thiết lập header bảo mật, chống DDoS/DoS, ẩn thông tin hệ thống"
+                },
+                {
+                  "en": "Internal Access Control, Authentication & Authorization",
+                  "vi": "Kiểm soát truy cập nội bộ, xác thực & phân quyền người dùng"
+                },
+                {
+                  "en": "Session Management, Data Encryption in Transit",
+                  "vi": "Quản lý phiên làm việc, mã hóa dữ liệu truyền tải"
+                },
+                {
+                  "en": "Secure API Design, Input Validation & Output Processing",
+                  "vi": "Thiết kế API an toàn, kiểm tra đầu vào và xử lý đầu ra"
+                },
+                {
+                  "en": "Logging, Monitoring, Library Vulnerability Scanning",
+                  "vi": "Ghi log, giám sát, quét và xử lý lỗ hổng thư viện"
                 }
               ],
               "achievements": {
-                "en": "• Significantly reduced ticket resolution time, improving operational efficiency and response rates.<br>• Ensured uninterrupted PROD operations, helping prevent customer impact and business disruptions.<br>• Reduced QA/QC workload by providing an isolated, realistic testing environment, decreasing time to test and minimizing production bugs.",
-                "vi": "• Giảm đáng kể thời gian giải quyết ticket, cải thiện hiệu quả hoạt động và tỷ lệ phản hồi.<br>• Đảm bảo hoạt động PROD không bị gián đoạn, giúp ngăn ngừa tác động đến khách hàng và gián đoạn kinh doanh.<br>• Giảm khối lượng công việc QA/QC bằng cách cung cấp môi trường kiểm thử tách biệt, thực tế, giảm thời gian kiểm thử và tối thiểu hóa lỗi sản xuất."
+                "en": "• Reduced QA/QC test data creation time by 40%<br>• Reduced negative end-customer incidents during system failures<br>• Increased customer satisfaction with better application experience<br>• Improved customer care service quality ratings",
+                "vi": "• Giảm thời gian tạo data test cho QA/QC đi 40%<br>• Giảm số lượng khách hàng đầu cuối tiêu cực khi có sự cố hệ thống<br>• Tăng số khách hàng có trải nghiệm cho ứng dụng tốt hơn đánh giá cao hơn<br>• Tăng tỉ lệ tốt về chăm sóc khách hàng"
               }
             },
             {
               "title": {
-                "en": "Project: Voolo",
-                "vi": "Dự án: Voolo"
-              },
-              "overview": {
-                "en": "A 'Buy Now – Pay Later' financial solution allowing customers to register and purchase products with flexible installment options.",
-                "vi": "Một giải pháp tài chính 'Mua Ngay – Trả Sau' cho phép khách hàng đăng ký và mua sản phẩm với các tùy chọn trả góp linh hoạt."
+                "en": "Project: Voolo – \"Buy Now – Pay Later\" Application",
+                "vi": "Dự án: Voolo – Ứng dụng \"Mua ngay – Trả sau\""
               },
               "technologies": {
-                "en": "Back-end: Python | AWS Services: API Gateway, Lambda, S3, Secret Manager, SQS, CloudWatch, Power Tools | Databases: DynamoDB, DocumentDB, MySQL",
-                "vi": "Back-end: Python | Dịch vụ AWS: API Gateway, Lambda, S3, Secret Manager, SQS, CloudWatch, Power Tools | Cơ sở dữ liệu: DynamoDB, DocumentDB, MySQL"
+                "en": "Technologies: AWS",
+                "vi": "Công nghệ: AWS"
               },
               "responsibilities": [
                 {
-                  "en": "Developed the complete customer onboarding workflow based on detailed BRD documentation provided by business analysts.",
-                  "vi": "Phát triển quy trình onboarding khách hàng hoàn chỉnh dựa trên tài liệu BRD chi tiết được cung cấp bởi các nhà phân tích kinh doanh."
+                  "en": "Built user registration process and identity verification according to BRD documents.",
+                  "vi": "Xây dựng quy trình đăng ký người dùng và xác minh danh tính theo tài liệu BRD."
                 },
                 {
-                  "en": "Designed APIs and implemented registration logic for stages including personal data collection, identity verification, and cross-checking.",
-                  "vi": "Thiết kế API và triển khai logic đăng ký cho các giai đoạn bao gồm thu thập dữ liệu cá nhân, xác minh danh tính và kiểm tra chéo."
+                  "en": "Designed APIs and tested with Postman, Pytest.",
+                  "vi": "Thiết kế API và kiểm thử với Postman, Pytest."
                 },
                 {
-                  "en": "Conducted API testing using Postman and Pytest to ensure stability and reliability before release.",
-                  "vi": "Tiến hành kiểm thử API bằng Postman và Pytest để đảm bảo tính ổn định và tin cậy trước khi phát hành."
+                  "en": "Developed and built customer integration from FEOL 2.0",
+                  "vi": "Phát triển và xây dựng tích hợp khách hàng từ FEOL 2.0"
+                },
+                {
+                  "en": "Ensured stability during operations and good efficiency for end users",
+                  "vi": "Đảm bảo sự ổn định trong quá trình vận hành và hiệu quả tốt đến với người dùng đầu cuối"
                 }
-              ]
+              ],
+              "security": [
+                {
+                  "en": "Security Headers, DDoS/DoS Protection, System Info Hiding",
+                  "vi": "Thiết lập header bảo mật, chống DDoS/DoS, ẩn thông tin hệ thống"
+                },
+                {
+                  "en": "Internal Access Control, Authentication & Authorization",
+                  "vi": "Kiểm soát truy cập nội bộ, xác thực & phân quyền người dùng"
+                },
+                {
+                  "en": "Session Management, Data Encryption in Transit",
+                  "vi": "Quản lý phiên làm việc, mã hóa dữ liệu truyền tải"
+                },
+                {
+                  "en": "Secure API Design, Input Validation & Output Processing",
+                  "vi": "Thiết kế API an toàn, kiểm tra đầu vào và xử lý đầu ra"
+                },
+                {
+                  "en": "Logging, Monitoring, Library Vulnerability Scanning",
+                  "vi": "Ghi log, giám sát, quét và xử lý lỗ hổng thư viện"
+                }
+              ],
+              "achievements": {
+                "en": "• Enhanced customer experience with new products<br>• Ensured stability during operations and good efficiency for end users",
+                "vi": "• Gia tăng trải nghiệm khách hàng với sản phẩm mới<br>• Đảm bảo sự ổn định trong quá trình vận hành và hiệu quả tốt đến với người dùng đầu cuối"
+              }
+            },
+            {
+              "title": {
+                "en": "Project: FEOL 2.0 – Loan & Financial Support Application",
+                "vi": "Dự án: FEOL 2.0 – Ứng dụng vay vốn & hỗ trợ tài chính"
+              },
+              "technologies": {
+                "en": "Technologies: AWS",
+                "vi": "Công nghệ: AWS"
+              },
+              "responsibilities": [
+                {
+                  "en": "Developed new features based on legacy systems.",
+                  "vi": "Phát triển chức năng mới dựa trên hệ thống cũ."
+                },
+                {
+                  "en": "Optimized tracking, monitoring metrics, improved performance and user experience.",
+                  "vi": "Tối ưu tracking, giám sát metric, cải thiện hiệu suất và trải nghiệm người dùng."
+                },
+                {
+                  "en": "Developed and rebuilt source code from Java to Python",
+                  "vi": "Phát triển và xây dựng lại các mã nguồn từ ngôn ngữ Java -> Python"
+                }
+              ],
+              "security": [
+                {
+                  "en": "Internal Access Control, Authentication",
+                  "vi": "Kiểm soát truy cập nội bộ, xác thực"
+                },
+                {
+                  "en": "Session Management, Data Encryption in Transit",
+                  "vi": "Quản lý phiên làm việc, mã hóa dữ liệu truyền tải"
+                },
+                {
+                  "en": "Secure API Design, Input Validation & Output Processing",
+                  "vi": "Thiết kế API an toàn, kiểm tra đầu vào và xử lý đầu ra"
+                },
+                {
+                  "en": "Logging, Monitoring",
+                  "vi": "Ghi log, giám sát"
+                }
+              ],
+              "achievements": {
+                "en": "• Increased application versatility for end users<br>• Ensured stability during operations and good efficiency for end users",
+                "vi": "• Tăng sự đa năng của ứng dụng đối với người dùng đầu cuối<br>• Đảm bảo sự ổn định trong quá trình vận hành và hiệu quả tốt đến với người dùng đầu cuối"
+              }
             }
           ]
         },
         {
           "company": {
             "en": "HTC Global Solutions and Services Joint Stock Company",
-            "vi": "Công ty Cổ phần Giải pháp và Dịch vụ Toàn cầu HTC"
+            "vi": "Công ty CP Giải pháp & Dịch vụ Toàn cầu HTC"
+          },
+          "position": {
+            "en": "SOC Analyst Tier 2 Intern",
+            "vi": "Thực tập sinh SOC Analyst Tier 2"
           },
           "duration": {
             "en": "April 2023 – January 2024",
-            "vi": "Tháng 4/2023 – Tháng 1/2024"
+            "vi": "04/2023 – 01/2024"
           },
           "projects": [
             {
               "title": {
-                "en": "Project: OpenVAS Integration with Splunk",
-                "vi": "Dự án: Tích hợp OpenVAS với Splunk"
-              },
-              "overview": {
-                "en": "This project focuses on collecting and analyzing security vulnerability information from the OpenVAS system and transferring the logs to the Splunk security information and event management (SIEM) system for analysis and monitoring.",
-                "vi": "Dự án này tập trung vào việc thu thập và phân tích thông tin lỗ hổng bảo mật từ hệ thống OpenVAS và chuyển các log đến hệ thống quản lý thông tin và sự kiện bảo mật (SIEM) Splunk để phân tích và giám sát."
+                "en": "Project: 4T Ca Mau",
+                "vi": "Dự án: 4T Cà Mau"
               },
               "technologies": {
-                "en": "Tools: OpenVAS | SIEM: Splunk",
-                "vi": "Công cụ: OpenVAS | SIEM: Splunk"
+                "en": "Technologies: Splunk, OpenVAS",
+                "vi": "Công nghệ: Splunk, OpenVAS"
               },
               "responsibilities": [
                 {
-                  "en": "Conduct vulnerability scans on a list of servers within the system.",
-                  "vi": "Thực hiện quét lỗ hổng trên danh sách các máy chủ trong hệ thống."
+                  "en": "Built and developed security vulnerability scanning from the system using OpenVAS",
+                  "vi": "Xây dựng và phát triển quét lỗ hổng bảo mật từ hệ thống bằng OpenVAS"
                 },
                 {
-                  "en": "Transfer vulnerability logs from OpenVAS to the Splunk system for analysis.",
-                  "vi": "Chuyển các log lỗ hổng từ OpenVAS đến hệ thống Splunk để phân tích."
+                  "en": "Built security monitoring system based on system logs using Splunk",
+                  "vi": "Xây dựng hệ thống giám sát bảo mật dựa trên log hệ thống bằng Splunk"
                 },
                 {
-                  "en": "Build a vulnerability monitoring system to provide timely alerts for potential security issues.",
-                  "vi": "Xây dựng hệ thống giám sát lỗ hổng để cung cấp cảnh báo kịp thời cho các vấn đề bảo mật tiềm ẩn."
+                  "en": "Optimized and maintained periodic system resource maintenance",
+                  "vi": "Tối ưu và bảo trì định kì về tài nguyên hệ thống"
+                },
+                {
+                  "en": "Maintained real-time stability for monitoring system",
+                  "vi": "Duy trì sự ổn định real-time cho hệ thống giám sát"
+                },
+                {
+                  "en": "Redesigned log resources before uploading to monitoring system",
+                  "vi": "Thiết kế lại tài nguyên log trước khi đưa lên hệ thống giám sát"
                 }
               ],
               "achievements": {
-                "en": "• Successfully integrated OpenVAS vulnerability scanning with Splunk, significantly reducing the time needed to detect and address security vulnerabilities.<br>• Enhanced security monitoring and vulnerability management capabilities, ensuring the system remains secure.",
-                "vi": "• Tích hợp thành công quét lỗ hổng OpenVAS với Splunk, giảm đáng kể thời gian cần thiết để phát hiện và giải quyết các lỗ hổng bảo mật.<br>• Nâng cao khả năng giám sát bảo mật và quản lý lỗ hổng, đảm bảo hệ thống luôn an toàn."
-              }
-            },
-            {
-              "title": {
-                "en": "Project: Building a Security Monitoring System",
-                "vi": "Dự án: Xây dựng Hệ thống Giám sát Bảo mật"
-              },
-              "overview": {
-                "en": "This project aimed to develop a comprehensive security monitoring system capable of detecting threats, security vulnerabilities, and network attacks by collecting logs from various sources and providing alerts when security incidents occur.",
-                "vi": "Dự án này nhằm phát triển một hệ thống giám sát bảo mật toàn diện có khả năng phát hiện các mối đe dọa, lỗ hổng bảo mật và các cuộc tấn công mạng bằng cách thu thập log từ nhiều nguồn khác nhau và cung cấp cảnh báo khi xảy ra sự cố bảo mật."
-              },
-              "technologies": {
-                "en": "SIEM: Splunk | Tools: Splunk Studio, Figma, Splunk Security",
-                "vi": "SIEM: Splunk | Công cụ: Splunk Studio, Figma, Splunk Security"
-              },
-              "responsibilities": [
-                {
-                  "en": "Develop a security monitoring system compliant with Official Dispatch 2973, ensuring the detection of at least 10 types of cyberattacks.",
-                  "vi": "Phát triển hệ thống giám sát bảo mật tuân thủ Công văn số 2973, đảm bảo phát hiện ít nhất 10 loại tấn công mạng."
-                },
-                {
-                  "en": "Create dashboards for monitoring and alerts, enabling the security team to quickly detect and respond to threats.",
-                  "vi": "Tạo dashboard để giám sát và cảnh báo, cho phép đội bảo mật nhanh chóng phát hiện và phản ứng với các mối đe dọa."
-                }
-              ],
-              "achievements": {
-                "en": "• Successfully built a security monitoring system that meets the organization's security standards and requirements.<br>• Ensured timely detection of threats, reducing risks and protecting the organization's IT assets.<br>• Strengthened the ability to detect cyberattacks and minimize security incidents by providing real-time alerts.",
-                "vi": "• Xây dựng thành công hệ thống giám sát bảo mật đáp ứng các tiêu chuẩn và yêu cầu bảo mật của tổ chức.<br>• Đảm bảo phát hiện kịp thời các mối đe dọa, giảm rủi ro và bảo vệ tài sản CNTT của tổ chức.<br>• Tăng cường khả năng phát hiện các cuộc tấn công mạng và giảm thiểu các sự cố bảo mật bằng cách cung cấp cảnh báo thời gian thực."
+                "en": "Maintained stable security for the entire IT system of Ca Mau Department of Information and Communications",
+                "vi": "Duy trì an ninh ổn định cho toàn bộ hệ thống sở TT&TT Cà Mau"
               }
             }
           ]
