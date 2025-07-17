@@ -410,6 +410,25 @@ body {
     color: white;
 }
 
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 18px;
+    color: #667eea;
+}
+
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 18px;
+    color: #e53e3e;
+    text-align: center;
+}
+
 /* Dark Theme */
 body.dark {
     background: #1a202c;
@@ -446,6 +465,21 @@ body.dark .education-card {
 body.dark .experience-item {
     background: #4a5568;
     border-color: #718096;
+}
+
+body.dark .project-overview {
+    background: #4a5568;
+    color: #e2e8f0;
+}
+
+body.dark .tech-used {
+    background: #4a5568;
+    color: #e2e8f0;
+}
+
+body.dark .achievements {
+    background: #4a5568;
+    color: #e2e8f0;
 }
 
 /* Language specific styles */
@@ -507,5 +541,11 @@ body[data-lang="en"] .lang-vi {
     .controls {
         flex-direction: column;
         gap: 8px;
+    }
+    
+    .company-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
     }
 }
