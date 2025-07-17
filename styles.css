@@ -433,14 +433,15 @@ body {
 
 .experience-content {
     padding: 25px;
-    max-height: 1000px;
-    overflow: hidden;
     transition: all 0.5s ease;
+    overflow: visible;
+    min-height: auto;
 }
 
 .experience-content.collapsed {
     max-height: 0;
     padding: 0 25px;
+    overflow: hidden;
 }
 
 .project-container {
@@ -708,41 +709,17 @@ body[data-lang="en"] .lang-vi {
         gap: 8px;
     }
     
-    @media (max-width: 768px) {
-        .cv-container {
-            margin: 100px 10px 20px;
-        }
-        
-        .page {
-            padding: 20px;
-        }
-        
-        .contact-info {
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .skills-grid {
-            grid-template-columns: 1fr;
-        }
-        
-        .controls {
-            flex-direction: column;
-            gap: 8px;
-        }
-        
-        .company-header {
-            flex-direction: column;
-            gap: 15px;
-            text-align: center;
-        }
-        
-        .company-header-left {
-            align-items: center;
-        }
-        
-        .company-header-right {
-            justify-content: center;
-        }
+    .company-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .company-header-left {
+        align-items: center;
+    }
+    
+    .company-header-right {
+        justify-content: center;
     }
 }
