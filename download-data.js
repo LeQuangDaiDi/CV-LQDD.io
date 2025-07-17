@@ -1,6 +1,5 @@
-// Download CV as PDF
-// Requires: jsPDF library
-// Usage: Include this script and call downloadPDF(language)
+// Download CV as PDF - GitHub Pages Compatible
+// Fallback solution without external PDF libraries
 
 // Condensed CV data for PDF generation
 const pdfData = {
@@ -71,138 +70,378 @@ const pdfData = {
     ]
 };
 
-// Create PDF using jsPDF
+// Create PDF using window.print() - GitHub Pages compatible
 function downloadPDF(language = 'en') {
-    // Check if jsPDF is available
-    if (typeof window.jsPDF === 'undefined') {
-        console.error('jsPDF library not found. Please include jsPDF library.');
-        alert('PDF generation library not loaded. Please refresh the page and try again.');
+    // Create a new window for PDF content
+    const printWindow = window.open('', '_blank');
+    
+    if (!printWindow) {
+        alert('Please allow popups for this site to download PDF');
         return;
     }
+    
+    // Generate HTML content for PDF
+    const htmlContent = generatePDFHTML(language);
+    
+    // Write content to new window
+    printWindow.document.write(htmlContent);
+    printWindow.document.close();
+    
+    // Wait for content to load, then trigger print
+    printWindow.onload = function() {
+        setTimeout(() => {
+            printWindow.print();
+            // Close window after printing
+            printWindow.onafterprint = function() {
+                printWindow.close();
+            };
+        }, 500);
+    };
+    
+    // Close dropdown after opening print dialog
+    const dropdown = document.getElementById('main-dropdown');
+    const dropdownContainer = document.querySelector('.download-dropdown');
+    if (dropdown) dropdown.classList.remove('show');
+    if (dropdownContainer) dropdownContainer.classList.remove('active');
+    
+    // Show success notification
+    showNotification(
+        language === 'en' ? 
+        '✓ Print dialog opened - Save as PDF' : 
+        '✓ Đã mở hộp thoại in - Lưu thành PDF'
+    );
+}
 
-    const { jsPDF } = window;
-    const doc = new jsPDF();
-    
-    // Set font
-    doc.setFont('helvetica');
-    
-    // Colors
-    const primaryColor = [102, 126, 234]; // #667eea
-    const secondaryColor = [74, 85, 104]; // #4a5568
-    const lightGray = [160, 160, 160];
-    
-    let yPosition = 20;
-    const pageWidth = doc.internal.pageSize.width;
-    const margin = 20;
-    const contentWidth = pageWidth - (margin * 2);
-    
-    // Helper function to add text with auto-wrap
-    function addText(text, x, y, maxWidth, fontSize = 10, style = 'normal') {
-        doc.setFontSize(fontSize);
-        doc.setFont('helvetica', style);
-        const lines = doc.splitTextToSize(text, maxWidth);
-        doc.text(lines, x, y);
-        return y + (lines.length * (fontSize * 0.4));
-    }
-    
-    // Helper function to add section separator
-    function addSectionSeparator(y) {
-        doc.setDrawColor(...lightGray);
-        doc.setLineWidth(0.5);
-        doc.line(margin, y, pageWidth - margin, y);
-        return y + 8;
-    }
-    
-    // Header with name and title
-    doc.setFillColor(...primaryColor);
-    doc.rect(0, 0, pageWidth, 45, 'F');
-    
-    doc.setTextColor(255, 255, 255);
-    doc.setFontSize(24);
-    doc.setFont('helvetica', 'bold');
-    doc.text(pdfData.personal.name, pageWidth / 2, 20, { align: 'center' });
-    
-    doc.setFontSize(14);
-    doc.setFont('helvetica', 'normal');
-    doc.text(pdfData.personal.title[language], pageWidth / 2, 30, { align: 'center' });
-    
-    // Contact info
-    doc.setFontSize(11);
-    const contactText = `📱 ${pdfData.personal.contact.phone} | ✉️ ${pdfData.personal.contact.email}`;
-    doc.text(contactText, pageWidth / 2, 38, { align: 'center' });
-    
-    // Reset text color
-    doc.setTextColor(0, 0, 0);
-    yPosition = 55;
-    
-    // About section
-    doc.setTextColor(...primaryColor);
-    doc.setFontSize(14);
-    doc.setFont('helvetica', 'bold');
-    doc.text(language === 'en' ? 'ABOUT' : 'GIỚI THIỆU', margin, yPosition);
-    yPosition += 8;
-    
-    doc.setTextColor(...secondaryColor);
-    yPosition = addText(pdfData.about[language], margin, yPosition, contentWidth, 10);
-    yPosition = addSectionSeparator(yPosition + 5);
-    
-    // Skills section
-    doc.setTextColor(...primaryColor);
-    doc.setFontSize(14);
-    doc.setFont('helvetica', 'bold');
-    doc.text(language === 'en' ? 'TECHNICAL SKILLS' : 'KỸ NĂNG CHUYÊN MÔN', margin, yPosition);
-    yPosition += 8;
-    
-    doc.setTextColor(...secondaryColor);
-    yPosition = addText(pdfData.skills[language], margin, yPosition, contentWidth, 10);
-    yPosition = addSectionSeparator(yPosition + 5);
-    
-    // Education section
-    doc.setTextColor(...primaryColor);
-    doc.setFontSize(14);
-    doc.setFont('helvetica', 'bold');
-    doc.text(language === 'en' ? 'EDUCATION' : 'HỌC VẤN', margin, yPosition);
-    yPosition += 8;
-    
-    doc.setTextColor(...secondaryColor);
-    yPosition = addText(pdfData.education[language], margin, yPosition, contentWidth, 10);
-    yPosition = addSectionSeparator(yPosition + 5);
-    
-    // Experience section
-    doc.setTextColor(...primaryColor);
-    doc.setFontSize(14);
-    doc.setFont('helvetica', 'bold');
-    doc.text(language === 'en' ? 'PROFESSIONAL EXPERIENCE' : 'KINH NGHIỆM NGHỀ NGHIỆP', margin, yPosition);
-    yPosition += 8;
-    
-    // Add experiences
-    pdfData.experience.forEach((exp, index) => {
-        // Check if we need more space
-        if (yPosition > 250) {
-            return; // Skip if not enough space
+// Generate HTML content for PDF
+function generatePDFHTML(language) {
+    return `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>${pdfData.personal.name} - CV</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
         }
         
-        // Company name and position
-        doc.setTextColor(...secondaryColor);
-        doc.setFontSize(12);
-        doc.setFont('helvetica', 'bold');
-        doc.text(exp.company, margin, yPosition);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         
-        // Duration (right aligned)
-        doc.setFont('helvetica', 'normal');
-        doc.text(exp.duration[language], pageWidth - margin, yPosition, { align: 'right' });
-        yPosition += 6;
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            font-size: 11px;
+            line-height: 1.4;
+            color: #333;
+            background: white;
+            width: 210mm;
+            min-height: 297mm;
+            padding: 15mm;
+        }
         
-        // Position
-        doc.setFontSize(11);
-        doc.setFont('helvetica', 'italic');
-        doc.text(exp.position, margin, yPosition);
-        yPosition += 6;
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
         
-        // Description
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(9);
-        yPosition = addText(exp.description[language], margin, yPosition, contentWidth, 9);
+        .name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .title {
+            font-size: 14px;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+        
+        .contact {
+            font-size: 12px;
+        }
+        
+        .section {
+            margin-bottom: 18px;
+        }
+        
+        .section-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+            padding-bottom: 4px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .about-content {
+            color: #4a5568;
+            line-height: 1.5;
+            text-align: justify;
+        }
+        
+        .skills-content {
+            color: #4a5568;
+            line-height: 1.5;
+        }
+        
+        .education-content {
+            color: #4a5568;
+            font-weight: 500;
+        }
+        
+        .experience-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .experience-item:last-child {
+            border-bottom: none;
+        }
+        
+        .company-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+        
+        .company-name {
+            font-weight: bold;
+            color: #2d3748;
+            font-size: 12px;
+        }
+        
+        .duration {
+            color: #666;
+            font-size: 10px;
+        }
+        
+        .position {
+            font-style: italic;
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 11px;
+        }
+        
+        .description {
+            color: #4a5568;
+            white-space: pre-line;
+            font-size: 10px;
+            line-height: 1.4;
+        }
+        
+        .footer {
+            position: fixed;
+            bottom: 10mm;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 8px;
+            color: #999;
+        }
+        
+        /* Print styles */
+        @media print {
+            body {
+                width: auto;
+                height: auto;
+                padding: 15mm;
+            }
+            
+            .header {
+                break-inside: avoid;
+            }
+            
+            .experience-item {
+                break-inside: avoid;
+            }
+            
+            .section {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="name">${pdfData.personal.name}</div>
+        <div class="title">${pdfData.personal.title[language]}</div>
+        <div class="contact">📱 ${pdfData.personal.contact.phone} | ✉️ ${pdfData.personal.contact.email}</div>
+    </div>
+    
+    <div class="section">
+        <div class="section-title">${language === 'en' ? 'ABOUT' : 'GIỚI THIỆU'}</div>
+        <div class="about-content">${pdfData.about[language]}</div>
+    </div>
+    
+    <div class="section">
+        <div class="section-title">${language === 'en' ? 'TECHNICAL SKILLS' : 'KỸ NĂNG CHUYÊN MÔN'}</div>
+        <div class="skills-content">${pdfData.skills[language]}</div>
+    </div>
+    
+    <div class="section">
+        <div class="section-title">${language === 'en' ? 'EDUCATION' : 'HỌC VẤN'}</div>
+        <div class="education-content">${pdfData.education[language]}</div>
+    </div>
+    
+    <div class="section">
+        <div class="section-title">${language === 'en' ? 'PROFESSIONAL EXPERIENCE' : 'KINH NGHIỆM NGHỀ NGHIỆP'}</div>
+        ${pdfData.experience.map(exp => `
+            <div class="experience-item">
+                <div class="company-header">
+                    <div class="company-name">${exp.company}</div>
+                    <div class="duration">${exp.duration[language]}</div>
+                </div>
+                <div class="position">${exp.position}</div>
+                <div class="description">${exp.description[language]}</div>
+            </div>
+        `).join('')}
+    </div>
+    
+    <div class="footer">
+        ${language === 'en' ? 
+            'Generated automatically from dynamic CV system' : 
+            'Được tạo tự động từ hệ thống CV động'
+        }
+    </div>
+</body>
+</html>
+    `;
+}
+
+// Alternative method using data URL (more compatible)
+function downloadPDFAlternative(language = 'en') {
+    const content = generatePDFContent(language);
+    const blob = new Blob([content], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = language === 'en' ? 
+        'Le_Quang_Dai_Di_CV_English.html' : 
+        'Le_Quang_Dai_Di_CV_Vietnamese.html';
+    
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    
+    // Close dropdown
+    const dropdown = document.getElementById('main-dropdown');
+    const dropdownContainer = document.querySelector('.download-dropdown');
+    if (dropdown) dropdown.classList.remove('show');
+    if (dropdownContainer) dropdownContainer.classList.remove('active');
+    
+    showNotification(
+        language === 'en' ? 
+        '✓ CV HTML downloaded - Open and print as PDF' : 
+        '✓ Đã tải CV HTML - Mở và in thành PDF'
+    );
+}
+
+// Generate complete HTML for download
+function generatePDFContent(language) {
+    return `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>${pdfData.personal.name} - CV</title>
+    <style>
+        @page { size: A4; margin: 15mm; }
+        body { font-family: Arial, sans-serif; font-size: 11px; line-height: 1.4; color: #333; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; text-align: center; border-radius: 8px; margin-bottom: 20px; }
+        .name { font-size: 24px; font-weight: bold; margin-bottom: 8px; }
+        .title { font-size: 14px; margin-bottom: 10px; }
+        .contact { font-size: 12px; }
+        .section { margin-bottom: 18px; }
+        .section-title { font-size: 14px; font-weight: bold; color: #667eea; margin-bottom: 10px; padding-bottom: 4px; border-bottom: 2px solid #667eea; }
+        .experience-item { margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0; }
+        .company-header { display: flex; justify-content: space-between; margin-bottom: 4px; }
+        .company-name { font-weight: bold; color: #2d3748; }
+        .duration { color: #666; font-size: 10px; }
+        .position { font-style: italic; color: #667eea; margin-bottom: 8px; }
+        .description { color: #4a5568; white-space: pre-line; font-size: 10px; }
+        @media print { body { margin: 0; } }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="name">${pdfData.personal.name}</div>
+        <div class="title">${pdfData.personal.title[language]}</div>
+        <div class="contact">📱 ${pdfData.personal.contact.phone} | ✉️ ${pdfData.personal.contact.email}</div>
+    </div>
+    <div class="section">
+        <div class="section-title">${language === 'en' ? 'ABOUT' : 'GIỚI THIỆU'}</div>
+        <div>${pdfData.about[language]}</div>
+    </div>
+    <div class="section">
+        <div class="section-title">${language === 'en' ? 'TECHNICAL SKILLS' : 'KỸ NĂNG CHUYÊN MÔN'}</div>
+        <div>${pdfData.skills[language]}</div>
+    </div>
+    <div class="section">
+        <div class="section-title">${language === 'en' ? 'EDUCATION' : 'HỌC VẤN'}</div>
+        <div>${pdfData.education[language]}</div>
+    </div>
+    <div class="section">
+        <div class="section-title">${language === 'en' ? 'PROFESSIONAL EXPERIENCE' : 'KINH NGHIỆM NGHỀ NGHIỆP'}</div>
+        ${pdfData.experience.map(exp => `
+            <div class="experience-item">
+                <div class="company-header">
+                    <div class="company-name">${exp.company}</div>
+                    <div class="duration">${exp.duration[language]}</div>
+                </div>
+                <div class="position">${exp.position}</div>
+                <div class="description">${exp.description[language]}</div>
+            </div>
+        `).join('')}
+    </div>
+</body>
+</html>`;
+}
+
+// Show notification function
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #38b2ac;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        z-index: 10000;
+        font-size: 14px;
+        box-shadow: 0 4px 15px rgba(56, 178, 172, 0.3);
+        transition: all 0.3s ease;
+    `;
+    
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        notification.style.transform = 'translateX(-50%) translateY(-20px)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }, 3000);
+}
+
+// Export functions for use in main script
+window.downloadPDF = downloadPDF;
+window.downloadPDFAlternative = downloadPDFAlternative;
         yPosition += 8;
     });
     
