@@ -10,10 +10,21 @@
     <div class="loading" id="loading">Loading CV...</div>
     
     <div class="controls" style="display: none;">
-        <button class="download-btn" onclick="downloadCV()">
-            <span class="lang-en">📄 Download CV</span>
-            <span class="lang-vi">📄 Tải CV</span>
-        </button>
+        <div class="download-dropdown">
+            <button class="download-btn" onclick="toggleMainDropdown(event)">
+                <span class="lang-en">📄 Download CV</span>
+                <span class="lang-vi">📄 Tải CV</span>
+                <span class="dropdown-arrow">▼</span>
+            </button>
+            <div class="dropdown-content" id="main-dropdown">
+                <button class="dropdown-item" onclick="downloadMainCV('en')">
+                    🇺🇸 English
+                </button>
+                <button class="dropdown-item" onclick="downloadMainCV('vi')">
+                    🇻🇳 Tiếng Việt
+                </button>
+            </div>
+        </div>
         <button class="language-toggle" onclick="toggleLanguage()">
             <span class="lang-en">🇻🇳 Tiếng Việt</span>
             <span class="lang-vi">🇺🇸 English</span>

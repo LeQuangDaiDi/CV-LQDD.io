@@ -197,22 +197,6 @@ function createExperienceSection(section) {
                 </div>
             </div>
             <div class="company-header-right">
-                <div class="download-dropdown">
-                    <button class="download-btn-main" onclick="toggleDropdown(event, ${index})">
-                        📄 
-                        <span class="lang-en">Download</span>
-                        <span class="lang-vi">Tải về</span>
-                        <span>▼</span>
-                    </button>
-                    <div class="dropdown-content" id="dropdown-${index}">
-                        <button class="dropdown-item" onclick="downloadCompanyCV(event, '${item.company.en}', 'en')">
-                            🇺🇸 English
-                        </button>
-                        <button class="dropdown-item" onclick="downloadCompanyCV(event, '${item.company.en}', 'vi')">
-                            🇻🇳 Tiếng Việt
-                        </button>
-                    </div>
-                </div>
                 <button class="collapse-toggle" id="toggle-${index}">
                     <span class="collapse-icon">▼</span>
                     <span class="lang-en">Hide</span>
@@ -340,31 +324,56 @@ function toggleTheme() {
     return;
 }
 
-// Toggle dropdown menu
-function toggleDropdown(event, index) {
-    event.stopPropagation(); // Prevent header click
+// Toggle main dropdown menu
+function toggleMainDropdown(event) {
+    event.stopPropagation();
     
-    const dropdown = document.getElementById(`dropdown-${index}`);
-    const allDropdowns = document.querySelectorAll('.dropdown-content');
+    const dropdown = document.getElementById('main-dropdown');
+    const dropdownContainer = document.querySelector('.download-dropdown');
     
-    // Close all other dropdowns
-    allDropdowns.forEach(d => {
-        if (d !== dropdown) {
-            d.classList.remove('show');
-        }
-    });
-    
-    // Toggle current dropdown
     dropdown.classList.toggle('show');
+    dropdownContainer.classList.toggle('active');
+}
+
+// Download main CV
+function downloadMainCV(language) {
+    if (!cvData || !cvData.downloadUrls) {
+        alert('Download links not available');
+        return;
+    }
+    
+    const url = cvData.downloadUrls[language];
+    if (url) {
+        window.open(url, '_blank');
+        
+        // Show success notification
+        const message = language === 'en' ? 
+            '✓ Opening CV (English)...' : 
+            '✓ Đang mở CV (Tiếng Việt)...';
+        showNotification(message);
+    } else {
+        alert(`Download link not available for ${language.toUpperCase()}`);
+    }
+    
+    // Close dropdown
+    document.getElementById('main-dropdown').classList.remove('show');
+    document.querySelector('.download-dropdown').classList.remove('active');
+}
+
+// Toggle dropdown menu - REMOVED (not needed for company headers anymore)
+function toggleDropdown(event, index) {
+    // This function is no longer needed
+    return;
 }
 
 // Close dropdown when clicking outside
 document.addEventListener('click', function(event) {
-    if (!event.target.matches('.download-btn-main')) {
-        const dropdowns = document.querySelectorAll('.dropdown-content');
-        dropdowns.forEach(dropdown => {
-            dropdown.classList.remove('show');
-        });
+    if (!event.target.closest('.download-dropdown')) {
+        const dropdown = document.getElementById('main-dropdown');
+        const dropdownContainer = document.querySelector('.download-dropdown');
+        
+        if (dropdown) dropdown.classList.remove('show');
+        if (dropdownContainer) dropdownContainer.classList.remove('active');
     }
 });
 
@@ -398,47 +407,16 @@ function toggleExperienceContent(index) {
     }
 }
 
-// Download company-specific CV
+// Download company-specific CV - REMOVED (not needed anymore)
 function downloadCompanyCV(event, companyName, language) {
-    event.stopPropagation(); // Prevent header click
-    
-    if (!cvData || !cvData.downloadUrls) {
-        alert('Download links not available');
-        return;
-    }
-    
-    const url = cvData.downloadUrls[language];
-    if (url) {
-        window.open(url, '_blank');
-        
-        // Show success notification
-        const message = language === 'en' ? 
-            `✓ Opening ${companyName} CV (English)...` : 
-            `✓ Đang mở CV ${companyName} (Tiếng Việt)...`;
-        showNotification(message);
-    } else {
-        alert(`Download link not available for ${language.toUpperCase()}`);
-    }
+    // This function is no longer needed
+    return;
 }
 
-// Download CV (main button)
+// Download CV (main button) - REMOVED (replaced by dropdown)
 function downloadCV() {
-    if (!cvData || !cvData.downloadUrls) {
-        alert('Download links not available');
-        return;
-    }
-    
-    const url = cvData.downloadUrls[currentLang];
-    if (url) {
-        window.open(url, '_blank');
-        
-        // Show success notification
-        showNotification(
-            currentLang === 'en' ? '✓ Opening CV download link...' : '✓ Đang mở liên kết tải CV...'
-        );
-    } else {
-        alert('Download link not available for current language');
-    }
+    // This function is no longer needed - replaced by dropdown
+    return;
 }
 
 // Show notification
@@ -543,7 +521,7 @@ function addKeyboardShortcuts() {
                 case 'd':
                 case 'D':
                     e.preventDefault();
-                    downloadCV();
+                    toggleMainDropdown(e);
                     break;
             }
         }
