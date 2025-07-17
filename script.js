@@ -225,8 +225,9 @@ function createExperienceSection(section) {
         
         // Add projects
         if (item.projects && item.projects.length > 0) {
-            item.projects.forEach(project => {
+            item.projects.forEach((project, projectIndex) => {
                 const projectDiv = document.createElement('div');
+                projectDiv.className = 'project-container';
                 projectDiv.innerHTML = `
                     <div class="project-title">
                         <span class="lang-en">${project.title.en}</span>
@@ -275,10 +276,10 @@ function createExperienceSection(section) {
                                 <span class="lang-vi">Bảo mật:</span>
                             </div>
                             <div class="security-grid">
-                                ${project.security.map(item => `
+                                ${project.security.map(secItem => `
                                     <div class="security-item">
-                                        <span class="lang-en">${item.en}</span>
-                                        <span class="lang-vi">${item.vi}</span>
+                                        <span class="lang-en">${secItem.en}</span>
+                                        <span class="lang-vi">${secItem.vi}</span>
                                     </div>
                                 `).join('')}
                             </div>

@@ -145,14 +145,14 @@ body {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     overflow: visible;
-    padding-bottom: 40px;
+    padding-bottom: 60px;
     min-height: auto;
 }
 
 .page {
     width: 100%;
     min-height: auto;
-    padding: 40px 40px 60px 40px;
+    padding: 40px 40px 80px 40px;
     position: relative;
     overflow: visible;
 }
@@ -160,7 +160,7 @@ body {
 .page:last-child {
     page-break-after: avoid;
     min-height: auto;
-    padding-bottom: 40px;
+    padding-bottom: 60px;
 }
 
 .header {
@@ -332,13 +332,14 @@ body {
 }
 
 .experience-item {
-    margin-bottom: 40px;
+    margin-bottom: 50px;
     background: white;
     border-radius: 16px;
     border: 1px solid #e2e8f0;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
     overflow: visible;
+    min-height: auto;
 }
 
 .experience-item:hover {
@@ -347,7 +348,7 @@ body {
 }
 
 .experience-item:last-child {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .company-header {
@@ -440,6 +441,15 @@ body {
 .experience-content.collapsed {
     max-height: 0;
     padding: 0 25px;
+}
+
+.project-container {
+    margin-bottom: 30px;
+    overflow: visible;
+}
+
+.project-container:last-child {
+    margin-bottom: 0;
 }
 
 .project-title {
