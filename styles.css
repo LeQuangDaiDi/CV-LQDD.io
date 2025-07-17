@@ -593,6 +593,62 @@ body {
     text-align: center;
 }
 
+/* Dark Theme - DISABLED */
+/*
+body.dark {
+    background: #1a202c;
+    color: #e2e8f0;
+}
+
+body.dark .cv-container {
+    background: #2d3748;
+}
+
+body.dark .page {
+    background: #2d3748;
+}
+
+body.dark .section-title {
+    color: #e2e8f0;
+}
+
+body.dark .about-text {
+    background: #4a5568;
+    color: #e2e8f0;
+}
+
+body.dark .skill-category {
+    background: #4a5568;
+    border-color: #718096;
+    color: #e2e8f0;
+}
+
+body.dark .education-card {
+    background: #4a5568;
+}
+
+body.dark .experience-item {
+    background: #4a5568;
+    border-color: #718096;
+}
+
+body.dark .project-overview {
+    background: #4a5568;
+    color: #e2e8f0;
+}
+
+body.dark .tech-used {
+    background: #4a5568;
+    color: #e2e8f0;
+}
+
+body.dark .achievements {
+    background: #4a5568;
+    color: #e2e8f0;
+}
+*/
+
+/* Language specific styles */
 .lang-en, .lang-vi {
     display: block;
 }
