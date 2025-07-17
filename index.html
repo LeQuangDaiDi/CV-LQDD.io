@@ -4,499 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lê Quang Đại Dĩ - CV</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.5;
-            color: #1a1a1a;
-            background: #f5f7fa;
-            transition: all 0.3s ease;
-        }
-
-        .controls {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .language-toggle {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 14px;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .language-toggle:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        .theme-toggle {
-            background: #2d3748;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 16px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            transform: rotate(180deg);
-        }
-
-        .cv-container {
-            max-width: 210mm;
-            margin: 60px auto 20px;
-            background: white;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .page {
-            width: 100%;
-            min-height: 297mm;
-            padding: 40px;
-            page-break-after: always;
-            position: relative;
-        }
-
-        .page:last-child {
-            page-break-after: avoid;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 30px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 16px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-
-        .name {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .title {
-            font-size: 16px;
-            font-weight: 400;
-            margin-bottom: 20px;
-            opacity: 0.9;
-            position: relative;
-            z-index: 2;
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            font-size: 14px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 8px 16px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-        }
-
-        .section {
-            margin-bottom: 35px;
-        }
-
-        .section-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 20px;
-            padding-bottom: 8px;
-            border-bottom: 3px solid transparent;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            border-radius: 2px;
-        }
-
-        .about-text {
-            font-size: 14px;
-            line-height: 1.7;
-            text-align: justify;
-            color: #4a5568;
-            background: #f7fafc;
-            padding: 25px;
-            border-radius: 12px;
-            border-left: 4px solid #667eea;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            font-size: 13px;
-        }
-
-        .skill-category {
-            background: #f7fafc;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-            transition: all 0.3s ease;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .skill-title {
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 10px;
-            font-size: 14px;
-        }
-
-        .skill-items {
-            color: #4a5568;
-            line-height: 1.6;
-        }
-
-        .education-card {
-            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-            padding: 25px;
-            border-radius: 12px;
-            border-left: 4px solid #667eea;
-        }
-
-        .education-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 14px;
-        }
-
-        .university {
-            font-weight: 600;
-            color: #2d3748;
-        }
-
-        .gpa {
-            color: #667eea;
-            font-weight: 500;
-            background: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-        }
-
-        .experience-item {
-            margin-bottom: 30px;
-            background: white;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        .experience-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .company-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .company-name {
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .duration {
-            font-size: 12px;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 6px 12px;
-            border-radius: 20px;
-        }
-
-        .experience-content {
-            padding: 25px;
-        }
-
-        .project-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 10px;
-            padding: 10px 0;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .project-overview {
-            font-size: 13px;
-            color: #4a5568;
-            margin-bottom: 15px;
-            line-height: 1.6;
-            background: #f7fafc;
-            padding: 15px;
-            border-radius: 8px;
-        }
-
-        .tech-used {
-            font-size: 12px;
-            margin-bottom: 15px;
-            background: #edf2f7;
-            padding: 12px;
-            border-radius: 8px;
-        }
-
-        .tech-label {
-            font-weight: 600;
-            color: #667eea;
-        }
-
-        .responsibilities {
-            font-size: 12px;
-            color: #4a5568;
-            line-height: 1.6;
-        }
-
-        .resp-title {
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 10px;
-            font-size: 13px;
-        }
-
-        .resp-list {
-            margin-left: 20px;
-            margin-bottom: 15px;
-        }
-
-        .resp-item {
-            margin-bottom: 8px;
-            position: relative;
-        }
-
-        .resp-item::before {
-            content: '▶';
-            position: absolute;
-            left: -15px;
-            color: #667eea;
-            font-size: 10px;
-            top: 2px;
-        }
-
-        .achievements {
-            background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%);
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 15px;
-            border-left: 4px solid #38b2ac;
-        }
-
-        .achievement-title {
-            font-weight: 600;
-            color: #2d3748;
-            font-size: 13px;
-            margin-bottom: 10px;
-        }
-
-        .achievement-list {
-            font-size: 12px;
-            color: #4a5568;
-            line-height: 1.5;
-        }
-
-        .security-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
-            font-size: 11px;
-            margin-top: 15px;
-        }
-
-        .security-item {
-            background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
-            padding: 12px;
-            border-radius: 8px;
-            text-align: center;
-            border: 1px solid #90cdf4;
-            color: #2b6cb0;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .security-item:hover {
-            transform: scale(1.05);
-            background: linear-gradient(135deg, #2b6cb0 0%, #2c5282 100%);
-            color: white;
-        }
-
-        /* Dark Theme */
-        body.dark {
-            background: #1a202c;
-            color: #e2e8f0;
-        }
-
-        body.dark .cv-container {
-            background: #2d3748;
-        }
-
-        body.dark .page {
-            background: #2d3748;
-        }
-
-        body.dark .section-title {
-            color: #e2e8f0;
-        }
-
-        body.dark .about-text {
-            background: #4a5568;
-            color: #e2e8f0;
-        }
-
-        body.dark .skill-category {
-            background: #4a5568;
-            border-color: #718096;
-            color: #e2e8f0;
-        }
-
-        body.dark .education-card {
-            background: #4a5568;
-        }
-
-        body.dark .experience-item {
-            background: #4a5568;
-            border-color: #718096;
-        }
-
-        /* Language specific styles */
-        .lang-en, .lang-vi {
-            display: block;
-        }
-
-        body[data-lang="vi"] .lang-en {
-            display: none;
-        }
-
-        body[data-lang="en"] .lang-vi {
-            display: none;
-        }
-
-        @media print {
-            .controls {
-                display: none;
-            }
-            
-            .cv-container {
-                box-shadow: none;
-                margin: 0;
-                border-radius: 0;
-            }
-            
-            .page {
-                padding: 20mm;
-                margin: 0;
-            }
-            
-            body {
-                background: white;
-            }
-
-            .header::before {
-                animation: none;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .cv-container {
-                margin: 100px 10px 20px;
-            }
-            
-            .page {
-                padding: 20px;
-            }
-            
-            .contact-info {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body data-lang="en">
     <div class="controls">
+        <button class="download-btn" onclick="downloadCV()">
+            <span class="lang-en">📄 Download CV</span>
+            <span class="lang-vi">📄 Tải CV</span>
+        </button>
         <button class="language-toggle" onclick="toggleLanguage()">
             <span class="lang-en">🇻🇳 Tiếng Việt</span>
             <span class="lang-vi">🇺🇸 English</span>
@@ -671,6 +186,162 @@
                             </div>
                         </div>
                         <div class="achievements">
+                            <div class="achievement-title">
+                                <span class="lang-en">Achievements:</span>
+                                <span class="lang-vi">Thành tựu:</span>
+                            </div>
+                            <div class="achievement-list">
+                                <span class="lang-en">• Successfully integrated OpenVAS vulnerability scanning with Splunk, significantly reducing the time needed to detect and address security vulnerabilities.<br>
+                                • Enhanced security monitoring and vulnerability management capabilities, ensuring the system remains secure.</span>
+                                <span class="lang-vi">• Tích hợp thành công quét lỗ hổng OpenVAS với Splunk, giảm đáng kể thời gian cần thiết để phát hiện và giải quyết các lỗ hổng bảo mật.<br>
+                                • Nâng cao khả năng giám sát bảo mật và quản lý lỗ hổng, đảm bảo hệ thống luôn an toàn.</span>
+                            </div>
+                        </div>
+
+                        <div class="project-title">
+                            <span class="lang-en">Project: Building a Security Monitoring System</span>
+                            <span class="lang-vi">Dự án: Xây dựng Hệ thống Giám sát Bảo mật</span>
+                        </div>
+                        <div class="project-overview">
+                            <strong>
+                                <span class="lang-en">Description:</span>
+                                <span class="lang-vi">Mô tả:</span>
+                            </strong>
+                            <span class="lang-en">This project aimed to develop a comprehensive security monitoring system capable of detecting threats, security vulnerabilities, and network attacks by collecting logs from various sources and providing alerts when security incidents occur.</span>
+                            <span class="lang-vi">Dự án này nhằm phát triển một hệ thống giám sát bảo mật toàn diện có khả năng phát hiện các mối đe dọa, lỗ hổng bảo mật và các cuộc tấn công mạng bằng cách thu thập log từ nhiều nguồn khác nhau và cung cấp cảnh báo khi xảy ra sự cố bảo mật.</span>
+                        </div>
+                        <div class="tech-used">
+                            <span class="tech-label">
+                                <span class="lang-en">Technologies Used:</span>
+                                <span class="lang-vi">Công nghệ sử dụng:</span>
+                            </span>
+                            <span class="lang-en">SIEM: Splunk | Tools: Splunk Studio, Figma, Splunk Security</span>
+                            <span class="lang-vi">SIEM: Splunk | Công cụ: Splunk Studio, Figma, Splunk Security</span>
+                        </div>
+                        <div class="responsibilities">
+                            <div class="resp-title">
+                                <span class="lang-en">Responsibilities:</span>
+                                <span class="lang-vi">Trách nhiệm:</span>
+                            </div>
+                            <div class="resp-list">
+                                <div class="resp-item">
+                                    <span class="lang-en">Collect and analyze logs from various security systems.</span>
+                                    <span class="lang-vi">Thu thập và phân tích log từ các hệ thống bảo mật khác nhau.</span>
+                                </div>
+                                <div class="resp-item">
+                                    <span class="lang-en">Develop a security monitoring system compliant with Official Dispatch 2973, ensuring the detection of at least 10 types of cyberattacks.</span>
+                                    <span class="lang-vi">Phát triển hệ thống giám sát bảo mật tuân thủ Công văn số 2973, đảm bảo phát hiện ít nhất 10 loại tấn công mạng.</span>
+                                </div>
+                                <div class="resp-item">
+                                    <span class="lang-en">Build a security alert processing system to ensure timely and effective handling of incidents.</span>
+                                    <span class="lang-vi">Xây dựng hệ thống xử lý cảnh báo bảo mật để đảm bảo xử lý sự cố kịp thời và hiệu quả.</span>
+                                </div>
+                                <div class="resp-item">
+                                    <span class="lang-en">Create dashboards for monitoring and alerts, enabling the security team to quickly detect and respond to threats.</span>
+                                    <span class="lang-vi">Tạo dashboard để giám sát và cảnh báo, cho phép đội bảo mật nhanh chóng phát hiện và phản ứng với các mối đe dọa.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="achievements">
+                            <div class="achievement-title">
+                                <span class="lang-en">Achievements:</span>
+                                <span class="lang-vi">Thành tựu:</span>
+                            </div>
+                            <div class="achievement-list">
+                                <span class="lang-en">• Successfully built a security monitoring system that meets the organization's security standards and requirements.<br>
+                                • Ensured timely detection of threats, reducing risks and protecting the organization's IT assets.<br>
+                                • Strengthened the ability to detect cyberattacks and minimize security incidents by providing real-time alerts.</span>
+                                <span class="lang-vi">• Xây dựng thành công hệ thống giám sát bảo mật đáp ứng các tiêu chuẩn và yêu cầu bảo mật của tổ chức.<br>
+                                • Đảm bảo phát hiện kịp thời các mối đe dọa, giảm rủi ro và bảo vệ tài sản CNTT của tổ chức.<br>
+                                • Tăng cường khả năng phát hiện các cuộc tấn công mạng và giảm thiểu các sự cố bảo mật bằng cách cung cấp cảnh báo thời gian thực.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="company-header">
+                        <div class="company-name">
+                            <span class="lang-en">Security Project Implementation</span>
+                            <span class="lang-vi">Triển khai Dự án Bảo mật</span>
+                        </div>
+                        <div class="duration">
+                            <span class="lang-en">Ongoing</span>
+                            <span class="lang-vi">Liên tục</span>
+                        </div>
+                    </div>
+                    <div class="experience-content">
+                        <div class="project-overview">
+                            <strong>
+                                <span class="lang-en">Overview:</span>
+                                <span class="lang-vi">Tổng quan:</span>
+                            </strong>
+                            <span class="lang-en">Comprehensive security measures implementation across various projects.</span>
+                            <span class="lang-vi">Triển khai các biện pháp bảo mật toàn diện trên các dự án khác nhau.</span>
+                        </div>
+                        <div class="responsibilities">
+                            <div class="resp-title">
+                                <span class="lang-en">Security Implementations:</span>
+                                <span class="lang-vi">Triển khai Bảo mật:</span>
+                            </div>
+                            <div class="security-grid">
+                                <div class="security-item">
+                                    <span class="lang-en">Security Headers</span>
+                                    <span class="lang-vi">Header Bảo mật</span>
+                                </div>
+                                <div class="security-item">
+                                    <span class="lang-en">Dependency & Vulnerability Scanning</span>
+                                    <span class="lang-vi">Quét Dependency & Lỗ hổng</span>
+                                </div>
+                                <div class="security-item">
+                                    <span class="lang-en">Session Management</span>
+                                    <span class="lang-vi">Quản lý Session</span>
+                                </div>
+                                <div class="security-item">
+                                    <span class="lang-en">Transport Security</span>
+                                    <span class="lang-vi">Bảo mật Truyền tải</span>
+                                </div>
+                                <div class="security-item">
+                                    <span class="lang-en">Data Protection</span>
+                                    <span class="lang-vi">Bảo vệ Dữ liệu</span>
+                                </div>
+                                <div class="security-item">
+                                    <span class="lang-en">Logging & Monitoring</span>
+                                    <span class="lang-vi">Ghi nhật ký & Giám sát</span>
+                                </div>
+                                <div class="security-item">
+                                    <span class="lang-en">Secure API Design</span>
+                                    <span class="lang-vi">Thiết kế API An toàn</span>
+                                </div>
+                                <div class="security-item">
+                                    <span class="lang-en">Input Validation & Output Encoding</span>
+                                    <span class="lang-vi">Xác thực Đầu vào & Mã hóa Đầu ra</span>
+                                </div>
+                                <div class="security-item">
+                                    <span class="lang-en">Authentication & Authorization</span>
+                                    <span class="lang-vi">Xác thực & Ủy quyền</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="achievements">
+                            <div class="achievement-title">
+                                <span class="lang-en">Key Security Measures:</span>
+                                <span class="lang-vi">Các Biện pháp Bảo mật Chính:</span>
+                            </div>
+                            <div class="achievement-list">
+                                <span class="lang-en">Enforced security headers (e.g., HSTS), disabled version disclosures, protected URL path structures, and implemented anti-DDoS/DoS strategies.</span>
+                                <span class="lang-vi">Thực thi các header bảo mật (ví dụ: HSTS), vô hiệu hóa tiết lộ phiên bản, bảo vệ cấu trúc đường dẫn URL và triển khai các chiến lược chống DDoS/DoS.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
                             <div class="achievement-title">
                                 <span class="lang-en">Key Achievements:</span>
                                 <span class="lang-vi">Thành tựu chính:</span>
@@ -909,143 +580,10 @@
                         </div>
                         <div class="achievements">
                             <div class="achievement-title">
-                                <span class="lang-en">Achievements:</span>
-                                <span class="lang-vi">Thành tựu:</span>
+                                <span class="lang-en">Key Security Measures:</span>
+                                <span class="lang-vi">Các Biện pháp Bảo mật Chính:</span>
                             </div>
-                            <div class="achievement-list">
-                                <span class="lang-en">• Successfully integrated OpenVAS vulnerability scanning with Splunk, significantly reducing the time needed to detect and address security vulnerabilities.<br>
-                                • Enhanced security monitoring and vulnerability management capabilities, ensuring the system remains secure.</span>
-                                <span class="lang-vi">• Tích hợp thành công quét lỗ hổng OpenVAS với Splunk, giảm đáng kể thời gian cần thiết để phát hiện và giải quyết các lỗ hổng bảo mật.<br>
-                                • Nâng cao khả năng giám sát bảo mật và quản lý lỗ hổng, đảm bảo hệ thống luôn an toàn.</span>
-                            </div>
-                        </div>
-
-                        <div class="project-title">
-                            <span class="lang-en">Project: Building a Security Monitoring System</span>
-                            <span class="lang-vi">Dự án: Xây dựng Hệ thống Giám sát Bảo mật</span>
-                        </div>
-                        <div class="project-overview">
-                            <strong>
-                                <span class="lang-en">Description:</span>
-                                <span class="lang-vi">Mô tả:</span>
-                            </strong>
-                            <span class="lang-en">This project aimed to develop a comprehensive security monitoring system capable of detecting threats, security vulnerabilities, and network attacks by collecting logs from various sources and providing alerts when security incidents occur.</span>
-                            <span class="lang-vi">Dự án này nhằm phát triển một hệ thống giám sát bảo mật toàn diện có khả năng phát hiện các mối đe dọa, lỗ hổng bảo mật và các cuộc tấn công mạng bằng cách thu thập log từ nhiều nguồn khác nhau và cung cấp cảnh báo khi xảy ra sự cố bảo mật.</span>
-                        </div>
-                        <div class="tech-used">
-                            <span class="tech-label">
-                                <span class="lang-en">Technologies Used:</span>
-                                <span class="lang-vi">Công nghệ sử dụng:</span>
-                            </span>
-                            <span class="lang-en">SIEM: Splunk | Tools: Splunk Studio, Figma, Splunk Security</span>
-                            <span class="lang-vi">SIEM: Splunk | Công cụ: Splunk Studio, Figma, Splunk Security</span>
-                        </div>
-                        <div class="responsibilities">
-                            <div class="resp-title">
-                                <span class="lang-en">Responsibilities:</span>
-                                <span class="lang-vi">Trách nhiệm:</span>
-                            </div>
-                            <div class="resp-list">
-                                <div class="resp-item">
-                                    <span class="lang-en">Collect and analyze logs from various security systems.</span>
-                                    <span class="lang-vi">Thu thập và phân tích log từ các hệ thống bảo mật khác nhau.</span>
-                                </div>
-                                <div class="resp-item">
-                                    <span class="lang-en">Develop a security monitoring system compliant with Official Dispatch 2973, ensuring the detection of at least 10 types of cyberattacks.</span>
-                                    <span class="lang-vi">Phát triển hệ thống giám sát bảo mật tuân thủ Công văn số 2973, đảm bảo phát hiện ít nhất 10 loại tấn công mạng.</span>
-                                </div>
-                                <div class="resp-item">
-                                    <span class="lang-en">Build a security alert processing system to ensure timely and effective handling of incidents.</span>
-                                    <span class="lang-vi">Xây dựng hệ thống xử lý cảnh báo bảo mật để đảm bảo xử lý sự cố kịp thời và hiệu quả.</span>
-                                </div>
-                                <div class="resp-item">
-                                    <span class="lang-en">Create dashboards for monitoring and alerts, enabling the security team to quickly detect and respond to threats.</span>
-                                    <span class="lang-vi">Tạo dashboard để giám sát và cảnh báo, cho phép đội bảo mật nhanh chóng phát hiện và phản ứng với các mối đe dọa.</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="achievements">
-                            <div class="achievement-title">
-                                <span class="lang-en">Achievements:</span>
-                                <span class="lang-vi">Thành tựu:</span>
-                            </div>
-                            <div class="achievement-list">
-                                <span class="lang-en">• Successfully built a security monitoring system that meets the organization's security standards and requirements.<br>
-                                • Ensured timely detection of threats, reducing risks and protecting the organization's IT assets.<br>
-                                • Strengthened the ability to detect cyberattacks and minimize security incidents by providing real-time alerts.</span>
-                                <span class="lang-vi">• Xây dựng thành công hệ thống giám sát bảo mật đáp ứng các tiêu chuẩn và yêu cầu bảo mật của tổ chức.<br>
-                                • Đảm bảo phát hiện kịp thời các mối đe dọa, giảm rủi ro và bảo vệ tài sản CNTT của tổ chức.<br>
-                                • Tăng cường khả năng phát hiện các cuộc tấn công mạng và giảm thiểu các sự cố bảo mật bằng cách cung cấp cảnh báo thời gian thực.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="experience-item">
-                    <div class="company-header">
-                        <div class="company-name">
-                            <span class="lang-en">Security Project Implementation</span>
-                            <span class="lang-vi">Triển khai Dự án Bảo mật</span>
-                        </div>
-                        <div class="duration">
-                            <span class="lang-en">Ongoing</span>
-                            <span class="lang-vi">Liên tục</span>
-                        </div>
-                    </div>
-                    <div class="experience-content">
-                        <div class="project-overview">
-                            <strong>
-                                <span class="lang-en">Overview:</span>
-                                <span class="lang-vi">Tổng quan:</span>
-                            </strong>
-                            <span class="lang-en">Comprehensive security measures implementation across various projects.</span>
-                            <span class="lang-vi">Triển khai các biện pháp bảo mật toàn diện trên các dự án khác nhau.</span>
-                        </div>
-                        <div class="responsibilities">
-                            <div class="resp-title">
-                                <span class="lang-en">Security Implementations:</span>
-                                <span class="lang-vi">Triển khai Bảo mật:</span>
-                            </div>
-                            <div class="security-grid">
-                                <div class="security-item">
-                                    <span class="lang-en">Security Headers</span>
-                                    <span class="lang-vi">Header Bảo mật</span>
-                                </div>
-                                <div class="security-item">
-                                    <span class="lang-en">Dependency & Vulnerability Scanning</span>
-                                    <span class="lang-vi">Quét Dependency & Lỗ hổng</span>
-                                </div>
-                                <div class="security-item">
-                                    <span class="lang-en">Session Management</span>
-                                    <span class="lang-vi">Quản lý Session</span>
-                                </div>
-                                <div class="security-item">
-                                    <span class="lang-en">Transport Security</span>
-                                    <span class="lang-vi">Bảo mật Truyền tải</span>
-                                </div>
-                                <div class="security-item">
-                                    <span class="lang-en">Data Protection</span>
-                                    <span class="lang-vi">Bảo vệ Dữ liệu</span>
-                                </div>
-                                <div class="security-item">
-                                    <span class="lang-en">Logging & Monitoring</span>
-                                    <span class="lang-vi">Ghi nhật ký & Giám sát</span>
-                                </div>
-                                <div class="security-item">
-                                    <span class="lang-en">Secure API Design</span>
-                                    <span class="lang-vi">Thiết kế API An toàn</span>
-                                </div>
-                                <div class="security-item">
-                                    <span class="lang-en">Input Validation & Output Encoding</span>
-                                    <span class="lang-vi">Xác thực Đầu vào & Mã hóa Đầu ra</span>
-                                </div>
-                                <div class="security-item">
-                                    <span class="lang-en">Authentication & Authorization</span>
-                                    <span class="lang-vi">Xác thực & Ủy quyền</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="achievements">
+                            <div class="achievements">
                             <div class="achievement-title">
                                 <span class="lang-en">Key Security Measures:</span>
                                 <span class="lang-vi">Các Biện pháp Bảo mật Chính:</span>
@@ -1061,65 +599,6 @@
         </div>
     </div>
 
-    <script>
-        let currentLang = 'en';
-        let isDarkMode = false;
-
-        function toggleLanguage() {
-            currentLang = currentLang === 'en' ? 'vi' : 'en';
-            document.body.setAttribute('data-lang', currentLang);
-            
-            // Update button text
-            const button = document.querySelector('.language-toggle');
-            if (currentLang === 'en') {
-                button.innerHTML = '🇻🇳 Tiếng Việt';
-            } else {
-                button.innerHTML = '🇺🇸 English';
-            }
-        }
-
-        function toggleTheme() {
-            isDarkMode = !isDarkMode;
-            document.body.classList.toggle('dark', isDarkMode);
-            
-            // Update button icon
-            const button = document.querySelector('.theme-toggle');
-            button.innerHTML = isDarkMode ? '☀️' : '🌙';
-        }
-
-        // Add smooth scrolling and print functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add print button functionality
-            document.addEventListener('keydown', function(e) {
-                if (e.ctrlKey && e.key === 'p') {
-                    e.preventDefault();
-                    window.print();
-                }
-            });
-
-            // Add smooth animations on scroll (for web view)
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, observerOptions);
-
-            // Observe all sections for animation
-            document.querySelectorAll('.section, .experience-item').forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                el.style.transition = 'all 0.6s ease';
-                observer.observe(el);
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
