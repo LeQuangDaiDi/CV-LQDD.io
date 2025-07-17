@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lê Quang Đại Dĩ - CV</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.4;
+            color: #333;
+            background: white;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 20mm;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            page-break-after: always;
+        }
+
+        .page:last-child {
+            page-break-after: avoid;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #2c5aa0;
+        }
+
+        .name {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c5aa0;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .title {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 12px;
+            color: #555;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c5aa0;
+            margin-bottom: 12px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .about-text {
+            font-size: 12px;
+            line-height: 1.6;
+            text-align: justify;
+            color: #444;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            font-size: 12px;
+        }
+
+        .skill-category {
+            margin-bottom: 10px;
+        }
+
+        .skill-title {
+            font-weight: bold;
+            color: #2c5aa0;
+            margin-bottom: 5px;
+        }
+
+        .skill-items {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .education-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+        }
+
+        .university {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .gpa {
+            color: #666;
+            font-style: italic;
+        }
+
+        .experience-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-left: 4px solid #2c5aa0;
+        }
+
+        .company-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .company-name {
+            font-size: 14px;
+            font-weight: bold;
+            color: #2c5aa0;
+        }
+
+        .duration {
+            font-size: 11px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .project-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .project-overview {
+            font-size: 11px;
+            color: #555;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .tech-used {
+            font-size: 11px;
+            margin-bottom: 8px;
+        }
+
+        .tech-label {
+            font-weight: bold;
+            color: #2c5aa0;
+        }
+
+        .responsibilities {
+            font-size: 11px;
+            color: #444;
+            line-height: 1.5;
+        }
+
+        .resp-title {
+            font-weight: bold;
+            color: #2c5aa0;
+            margin-bottom: 5px;
+        }
+
+        .resp-list {
+            margin-left: 15px;
+            margin-bottom: 10px;
+        }
+
+        .resp-item {
+            margin-bottom: 3px;
+        }
+
+        .achievements {
+            background: #e8f4f8;
+            padding: 8px;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+
+        .achievement-title {
+            font-weight: bold;
+            color: #2c5aa0;
+            font-size: 11px;
+            margin-bottom: 5px;
+        }
+
+        .achievement-list {
+            font-size: 11px;
+            color: #444;
+            line-height: 1.4;
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            font-size: 11px;
+            color: #555;
+        }
+
+        .security-item {
+            background: #f0f8ff;
+            padding: 8px;
+            border-radius: 4px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        @media print {
+            .page {
+                box-shadow: none;
+                margin: 0;
+                padding: 15mm;
+            }
+            
+            body {
+                background: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page 1 -->
+    <div class="page">
+        <div class="header">
+            <div class="name">Lê Quang Đại Dĩ</div>
+            <div class="title">SECURITY ENGINEER | FORMER SOC ANALYST | BACKEND DEVELOPER</div>
+            <div class="contact-info">
+                <div class="contact-item">📱 0929860265</div>
+                <div class="contact-item">✉️ dile8861@gmail.com</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">About Me</div>
+            <div class="about-text">
+                Security Engineer with a strong technical foundation in backend software development and system security monitoring. Experienced in real-world incident analysis, building SIEM-based monitoring systems, deploying vulnerability assessment tools, and integrating the MITRE ATT&CK framework. Proficient in designing APIs, handling large-scale data processing, and deploying distributed systems on AWS. Career objective is to become a DevSecOps or Security Engineer capable of securing systems from the application layer down to the infrastructure level.
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Technical Skills</div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="skill-title">Programming & Development:</div>
+                    <div class="skill-items">Python, TypeScript, FastAPI, Django, Flask, Angular, MITRE ATT&CK®</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-title">Cloud & DevOps:</div>
+                    <div class="skill-items">AWS (Lambda, API Gateway, CloudWatch,...), GitHub Actions (CI/CD), AWS deployment automation</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-title">Security Tools & Monitoring:</div>
+                    <div class="skill-items">OpenVAS, Splunk, Wazuh, Nmap,...</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-title">Databases:</div>
+                    <div class="skill-items">SQL, MySQL, DynamoDB, DocumentDB, MongoDB</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-title">Others:</div>
+                    <div class="skill-items">Figma, Git</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Education</div>
+            <div class="education-item">
+                <div class="university">Gia Dinh University</div>
+                <div class="gpa">GPA: 3.5/4.0</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Experience</div>
+            
+            <div class="experience-item">
+                <div class="company-header">
+                    <div class="company-name">BaseBS (BASE BUSINESS SOLUTIONS CORPORATION)</div>
+                    <div class="duration">May 2025 – Present</div>
+                </div>
+                <div class="project-title">Project: uCRM (Unify Customer Request Manage)</div>
+                <div class="project-overview">
+                    <strong>Overview:</strong> Provided support for bug fixes and performance optimization of core features.
+                </div>
+                <div class="tech-used">
+                    <span class="tech-label">Technologies Used:</span> Back-end: Python | Framework: Django | Services: Redis, Celery, MongoDB
+                </div>
+                <div class="responsibilities">
+                    <div class="resp-title">Responsibilities:</div>
+                    <div class="resp-list">
+                        <div class="resp-item">• Provided support in troubleshooting functional issues and optimizing performance for each product across different agents, tailored to the specific usage needs and priorities of each agent.</div>
+                        <div class="resp-item">• Assisted in resolving operational issues and enhancing performance for each product, with solutions customized based on the specific requirements and usage patterns of individual agents.</div>
+                    </div>
+                    <div class="resp-title">Security:</div>
+                    <div class="security-grid">
+                        <div class="security-item">Access Control for Internal Services</div>
+                        <div class="security-item">Data Protection</div>
+                        <div class="security-item">Logging & Monitoring</div>
+                        <div class="security-item">Secure API Design</div>
+                        <div class="security-item">Input Validation & Output Encoding</div>
+                    </div>
+                </div>
+                <div class="achievements">
+                    <div class="achievement-title">Key Achievements:</div>
+                    <div class="achievement-list">
+                        Ensured stable operations and optimized performance of each product across individual agents, delivering tangible and positive benefits tailored to their specific needs.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 2 -->
+    <div class="page">
+        <div class="section">
+            <div class="experience-item">
+                <div class="company-header">
+                    <div class="company-name">FECredit (Công ty Tài chính TNHH Ngân hàng Việt Nam Thịnh Vượng SMBC)</div>
+                    <div class="duration">April 2024 – May 2025</div>
+                </div>
+                
+                <div class="project-title">Project: Portal</div>
+                <div class="project-overview">
+                    <strong>Overview:</strong> A dual-environment portal system (Internal Support & Production Support) designed to support internal operations and handle exception cases in the production environment.
+                </div>
+                <div class="tech-used">
+                    <span class="tech-label">Technologies Used:</span> Front-end: Angular | Back-end: AWS(Python) | AWS Services: API Gateway, Lambda, S3, Secret Manager, SQS, CloudWatch, DynamoDB, DocumentDB, MySQL | Others: AWS Power Tools, GitHub Actions (CI/CD), Figma
+                </div>
+                <div class="responsibilities">
+                    <div class="resp-title">Responsibilities:</div>
+                    <div class="resp-list">
+                        <div class="resp-item">• <strong>Internal Environment:</strong> Designed and maintained an internal testing portal for QA/QC teams to simulate user flows before production deployment, based on pre-defined business rules.</div>
+                        <div class="resp-item">• <strong>Production Environment:</strong> Handled exception-based business logic triggered by JIRA tickets.</div>
+                        <div class="resp-item">• Implemented large-scale notification systems for up to 3 million customers based on dynamic business criteria.</div>
+                    </div>
+                </div>
+                <div class="achievements">
+                    <div class="achievement-title">Key Achievements:</div>
+                    <div class="achievement-list">
+                        • Significantly reduced ticket resolution time, improving operational efficiency and response rates.<br>
+                        • Ensured uninterrupted PROD operations, helping prevent customer impact and business disruptions.<br>
+                        • Reduced QA/QC workload by providing an isolated, realistic testing environment, decreasing time to test and minimizing production bugs.
+                    </div>
+                </div>
+
+                <div class="project-title">Project: Voolo</div>
+                <div class="project-overview">
+                    <strong>Overview:</strong> A "Buy Now – Pay Later" financial solution allowing customers to register and purchase products with flexible installment options.
+                </div>
+                <div class="tech-used">
+                    <span class="tech-label">Technologies Used:</span> Back-end: Python | AWS Services: API Gateway, Lambda, S3, Secret Manager, SQS, CloudWatch, Power Tools | Databases: DynamoDB, DocumentDB, MySQL
+                </div>
+                <div class="responsibilities">
+                    <div class="resp-title">Responsibilities:</div>
+                    <div class="resp-list">
+                        <div class="resp-item">• Developed the complete customer onboarding workflow based on detailed BRD documentation provided by business analysts.</div>
+                        <div class="resp-item">• Designed APIs and implemented registration logic for stages including personal data collection, identity verification, and cross-checking.</div>
+                        <div class="resp-item">• Conducted API testing using Postman and Pytest to ensure stability and reliability before release.</div>
+                        <div class="resp-item">• Collaborated closely with BAs to continuously refine workflows according to business feedback.</div>
+                        <div class="resp-item">• Monitored and operated backend services via CloudWatch and addressed alerts as needed.</div>
+                    </div>
+                </div>
+
+                <div class="project-title">Project: Production Feature Support & Development</div>
+                <div class="project-overview">
+                    <strong>Overview:</strong> Enhancements and support for production systems and the Portal based on evolving business requirements.
+                </div>
+                <div class="responsibilities">
+                    <div class="resp-title">Responsibilities:</div>
+                    <div class="resp-list">
+                        <div class="resp-item">• Analyzed and implemented new business features for the production environment, such as logic upgrades and internal tools.</div>
+                        <div class="resp-item">• Refactored and maintained legacy modules on the Portal system to meet new operational demands.</div>
+                        <div class="resp-item">• Coordinated with DevOps teams to manage version control and automate deployments using GitHub Actions (CI/CD).</div>
+                        <div class="resp-item">• Participated in code reviews to ensure code quality, system scalability, and security compliance.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="company-header">
+                    <div class="company-name">HTC Global Solutions and Services Joint Stock Company</div>
+                    <div class="duration">April 2023 – January 2024</div>
+                </div>
+                
+                <div class="project-title">Project: OpenVAS Integration with Splunk</div>
+                <div class="project-overview">
+                    <strong>Description:</strong> This project focuses on collecting and analyzing security vulnerability information from the OpenVAS system and transferring the logs to the Splunk security information and event management (SIEM) system for analysis and monitoring.
+                </div>
+                <div class="tech-used">
+                    <span class="tech-label">Technologies Used:</span> Tools: OpenVAS | SIEM: Splunk
+                </div>
+                <div class="responsibilities">
+                    <div class="resp-title">Responsibilities:</div>
+                    <div class="resp-list">
+                        <div class="resp-item">• Conduct vulnerability scans on a list of servers within the system.</div>
+                        <div class="resp-item">• Transfer vulnerability logs from OpenVAS to the Splunk system for analysis.</div>
+                        <div class="resp-item">• Analyze the logs and filter important log sources to include in the monitoring system.</div>
+                        <div class="resp-item">• Build a vulnerability monitoring system to provide timely alerts for potential security issues.</div>
+                    </div>
+                </div>
+                <div class="achievements">
+                    <div class="achievement-title">Achievements:</div>
+                    <div class="achievement-list">
+                        • Successfully integrated OpenVAS vulnerability scanning with Splunk, significantly reducing the time needed to detect and address security vulnerabilities.<br>
+                        • Enhanced security monitoring and vulnerability management capabilities, ensuring the system remains secure.
+                    </div>
+                </div>
+
+                <div class="project-title">Project: Building a Security Monitoring System</div>
+                <div class="project-overview">
+                    <strong>Description:</strong> This project aimed to develop a comprehensive security monitoring system capable of detecting threats, security vulnerabilities, and network attacks by collecting logs from various sources and providing alerts when security incidents occur.
+                </div>
+                <div class="tech-used">
+                    <span class="tech-label">Technologies Used:</span> SIEM: Splunk | Tools: Splunk Studio, Figma, Splunk Security
+                </div>
+                <div class="responsibilities">
+                    <div class="resp-title">Responsibilities:</div>
+                    <div class="resp-list">
+                        <div class="resp-item">• Collect and analyze logs from various security systems.</div>
+                        <div class="resp-item">• Develop a security monitoring system compliant with Official Dispatch 2973, ensuring the detection of at least 10 types of cyberattacks.</div>
+                        <div class="resp-item">• Build a security alert processing system to ensure timely and effective handling of incidents.</div>
+                        <div class="resp-item">• Create dashboards for monitoring and alerts, enabling the security team to quickly detect and respond to threats.</div>
+                    </div>
+                </div>
+                <div class="achievements">
+                    <div class="achievement-title">Achievements:</div>
+                    <div class="achievement-list">
+                        • Successfully built a security monitoring system that meets the organization's security standards and requirements.<br>
+                        • Ensured timely detection of threats, reducing risks and protecting the organization's IT assets.<br>
+                        • Strengthened the ability to detect cyberattacks and minimize security incidents by providing real-time alerts.
+                    </div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="project-title">Security Project Implementation</div>
+                <div class="project-overview">
+                    <strong>Overview:</strong> Comprehensive security measures implementation across various projects.
+                </div>
+                <div class="responsibilities">
+                    <div class="resp-title">Security Implementations:</div>
+                    <div class="security-grid">
+                        <div class="security-item">Security Headers</div>
+                        <div class="security-item">Dependency & Vulnerability Scanning</div>
+                        <div class="security-item">Session Management</div>
+                        <div class="security-item">Transport Security</div>
+                        <div class="security-item">Data Protection</div>
+                        <div class="security-item">Logging & Monitoring</div>
+                        <div class="security-item">Secure API Design</div>
+                        <div class="security-item">Input Validation & Output Encoding</div>
+                        <div class="security-item">Authentication & Authorization</div>
+                    </div>
+                </div>
+                <div class="achievements">
+                    <div class="achievement-title">Key Security Measures:</div>
+                    <div class="achievement-list">
+                        Enforced security headers (e.g., HSTS), disabled version disclosures, protected URL path structures, and implemented anti-DDoS/DoS strategies.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
