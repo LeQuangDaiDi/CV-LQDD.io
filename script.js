@@ -177,26 +177,46 @@ function createEducationSection(section) {
 function createExperienceSection(section) {
     const experienceDiv = document.createElement('div');
     
-    section.items.forEach(item => {
+    section.items.forEach((item, index) => {
         const itemDiv = document.createElement('div');
         itemDiv.className = 'experience-item';
         
         const headerDiv = document.createElement('div');
         headerDiv.className = 'company-header';
+        headerDiv.onclick = () => toggleExperienceContent(index);
+        
         headerDiv.innerHTML = `
-            <div class="company-name">
-                <span class="lang-en">${item.company.en}</span>
-                <span class="lang-vi">${item.company.vi}</span>
+            <div class="company-header-left">
+                <div class="company-name">
+                    <span class="lang-en">${item.company.en}</span>
+                    <span class="lang-vi">${item.company.vi}</span>
+                </div>
+                <div class="duration">
+                    <span class="lang-en">${item.duration.en}</span>
+                    <span class="lang-vi">${item.duration.vi}</span>
+                </div>
             </div>
-            <div class="duration">
-                <span class="lang-en">${item.duration.en}</span>
-                <span class="lang-vi">${item.duration.vi}</span>
+            <div class="company-header-right">
+                <div class="download-buttons">
+                    <button class="download-btn-small" onclick="downloadCompanyCV(event, '${item.company.en}', 'en')">
+                        🇺🇸 EN
+                    </button>
+                    <button class="download-btn-small" onclick="downloadCompanyCV(event, '${item.company.en}', 'vi')">
+                        🇻🇳 VI
+                    </button>
+                </div>
+                <button class="collapse-toggle" id="toggle-${index}">
+                    <span class="collapse-icon">▼</span>
+                    <span class="lang-en">Hide</span>
+                    <span class="lang-vi">Ẩn</span>
+                </button>
             </div>
         `;
         itemDiv.appendChild(headerDiv);
         
         const contentDiv = document.createElement('div');
         contentDiv.className = 'experience-content';
+        contentDiv.id = `content-${index}`;
         
         // Add projects
         if (item.projects) {
@@ -315,7 +335,60 @@ function toggleTheme() {
     button.innerHTML = isDarkMode ? '☀️' : '🌙';
 }
 
-// Download CV
+// Toggle experience content
+function toggleExperienceContent(index) {
+    const content = document.getElementById(`content-${index}`);
+    const toggle = document.getElementById(`toggle-${index}`);
+    
+    if (content && toggle) {
+        const isCollapsed = content.classList.contains('collapsed');
+        
+        if (isCollapsed) {
+            // Expand
+            content.classList.remove('collapsed');
+            toggle.classList.remove('collapsed');
+            toggle.innerHTML = `
+                <span class="collapse-icon">▼</span>
+                <span class="lang-en">Hide</span>
+                <span class="lang-vi">Ẩn</span>
+            `;
+        } else {
+            // Collapse
+            content.classList.add('collapsed');
+            toggle.classList.add('collapsed');
+            toggle.innerHTML = `
+                <span class="collapse-icon">▼</span>
+                <span class="lang-en">Show</span>
+                <span class="lang-vi">Hiện</span>
+            `;
+        }
+    }
+}
+
+// Download company-specific CV
+function downloadCompanyCV(event, companyName, language) {
+    event.stopPropagation(); // Prevent header click
+    
+    if (!cvData || !cvData.downloadUrls) {
+        alert('Download links not available');
+        return;
+    }
+    
+    const url = cvData.downloadUrls[language];
+    if (url) {
+        window.open(url, '_blank');
+        
+        // Show success notification
+        const message = language === 'en' ? 
+            `✓ Opening ${companyName} CV (English)...` : 
+            `✓ Đang mở CV ${companyName} (Tiếng Việt)...`;
+        showNotification(message);
+    } else {
+        alert(`Download link not available for ${language.toUpperCase()}`);
+    }
+}
+
+// Download CV (main button)
 function downloadCV() {
     if (!cvData || !cvData.downloadUrls) {
         alert('Download links not available');
