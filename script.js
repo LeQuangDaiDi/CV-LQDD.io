@@ -197,13 +197,21 @@ function createExperienceSection(section) {
                 </div>
             </div>
             <div class="company-header-right">
-                <div class="download-buttons">
-                    <button class="download-btn-small" onclick="downloadCompanyCV(event, '${item.company.en}', 'en')">
-                        🇺🇸 EN
+                <div class="download-dropdown">
+                    <button class="download-btn-main" onclick="toggleDropdown(event, ${index})">
+                        📄 
+                        <span class="lang-en">Download</span>
+                        <span class="lang-vi">Tải về</span>
+                        <span>▼</span>
                     </button>
-                    <button class="download-btn-small" onclick="downloadCompanyCV(event, '${item.company.en}', 'vi')">
-                        🇻🇳 VI
-                    </button>
+                    <div class="dropdown-content" id="dropdown-${index}">
+                        <button class="dropdown-item" onclick="downloadCompanyCV(event, '${item.company.en}', 'en')">
+                            🇺🇸 English
+                        </button>
+                        <button class="dropdown-item" onclick="downloadCompanyCV(event, '${item.company.en}', 'vi')">
+                            🇻🇳 Tiếng Việt
+                        </button>
+                    </div>
                 </div>
                 <button class="collapse-toggle" id="toggle-${index}">
                     <span class="collapse-icon">▼</span>
@@ -326,14 +334,39 @@ function toggleLanguage() {
     }
 }
 
-// Toggle theme
+// Toggle theme - DISABLED
 function toggleTheme() {
-    isDarkMode = !isDarkMode;
-    document.body.classList.toggle('dark', isDarkMode);
-    
-    const button = document.querySelector('.theme-toggle');
-    button.innerHTML = isDarkMode ? '☀️' : '🌙';
+    // Dark mode disabled
+    return;
 }
+
+// Toggle dropdown menu
+function toggleDropdown(event, index) {
+    event.stopPropagation(); // Prevent header click
+    
+    const dropdown = document.getElementById(`dropdown-${index}`);
+    const allDropdowns = document.querySelectorAll('.dropdown-content');
+    
+    // Close all other dropdowns
+    allDropdowns.forEach(d => {
+        if (d !== dropdown) {
+            d.classList.remove('show');
+        }
+    });
+    
+    // Toggle current dropdown
+    dropdown.classList.toggle('show');
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+    if (!event.target.matches('.download-btn-main')) {
+        const dropdowns = document.querySelectorAll('.dropdown-content');
+        dropdowns.forEach(dropdown => {
+            dropdown.classList.remove('show');
+        });
+    }
+});
 
 // Toggle experience content
 function toggleExperienceContent(index) {
@@ -505,8 +538,7 @@ function addKeyboardShortcuts() {
                     break;
                 case 't':
                 case 'T':
-                    e.preventDefault();
-                    toggleTheme();
+                    // Dark mode disabled
                     break;
                 case 'd':
                 case 'D':
@@ -552,11 +584,9 @@ function addAccessibilityFeatures() {
     // Add tooltips for keyboard shortcuts
     const downloadBtn = document.querySelector('.download-btn');
     const langBtn = document.querySelector('.language-toggle');
-    const themeBtn = document.querySelector('.theme-toggle');
 
     if (downloadBtn) downloadBtn.title = 'Download CV (Alt+D)';
     if (langBtn) langBtn.title = 'Toggle Language (Alt+L)';
-    if (themeBtn) themeBtn.title = 'Toggle Theme (Alt+T)';
 
     // Add keyboard navigation support
     document.addEventListener('keydown', function(e) {

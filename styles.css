@@ -70,6 +70,7 @@ body {
     font-size: 16px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
+    display: none; /* Hidden - dark mode disabled */
 }
 
 .theme-toggle:hover {
@@ -345,6 +346,73 @@ body {
 .download-buttons {
     display: flex;
     gap: 8px;
+    position: relative;
+}
+
+.download-dropdown {
+    position: relative;
+}
+
+.download-btn-main {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.download-btn-main:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    min-width: 120px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    z-index: 1000;
+    margin-top: 5px;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.dropdown-item {
+    background: none;
+    border: none;
+    color: #333;
+    padding: 10px 15px;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+    font-size: 12px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dropdown-item:hover {
+    background: #f5f5f5;
+}
+
+.dropdown-item:first-child {
+    border-radius: 8px 8px 0 0;
+}
+
+.dropdown-item:last-child {
+    border-radius: 0 0 8px 8px;
 }
 
 .download-btn-small {
@@ -507,7 +575,8 @@ body {
     text-align: center;
 }
 
-/* Dark Theme */
+/* Dark Theme - DISABLED */
+/*
 body.dark {
     background: #1a202c;
     color: #e2e8f0;
@@ -559,6 +628,7 @@ body.dark .achievements {
     background: #4a5568;
     color: #e2e8f0;
 }
+*/
 
 /* Language specific styles */
 .lang-en, .lang-vi {
