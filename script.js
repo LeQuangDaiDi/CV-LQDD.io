@@ -42,6 +42,19 @@ function renderCV() {
     // Update page title
     document.title = `${getText(cvData.personal.name)} - CV`;
 
+    // Debug: Log experience data
+    console.log('CV Data loaded:', cvData);
+    console.log('Experience items:', cvData.sections.experience.items);
+    
+    cvData.sections.experience.items.forEach((item, index) => {
+        console.log(`Company ${index}: ${item.company.en} has ${item.projects?.length || 0} projects`);
+        if (item.projects) {
+            item.projects.forEach((project, pIndex) => {
+                console.log(`  Project ${pIndex}: ${project.title.en}`);
+            });
+        }
+    });
+
     // Create pages
     cvData.pages.forEach((page, index) => {
         const pageDiv = document.createElement('div');
@@ -178,6 +191,8 @@ function createExperienceSection(section) {
     const experienceDiv = document.createElement('div');
     
     section.items.forEach((item, index) => {
+        console.log(`Rendering company ${index}:`, item.company.en, `with ${item.projects?.length || 0} projects`);
+        
         const itemDiv = document.createElement('div');
         itemDiv.className = 'experience-item';
         
@@ -225,7 +240,10 @@ function createExperienceSection(section) {
         
         // Add projects
         if (item.projects && item.projects.length > 0) {
+            console.log(`Adding ${item.projects.length} projects for ${item.company.en}`);
             item.projects.forEach((project, projectIndex) => {
+                console.log(`  Project ${projectIndex}:`, project.title.en);
+                
                 const projectDiv = document.createElement('div');
                 projectDiv.className = 'project-container';
                 projectDiv.innerHTML = `
@@ -300,10 +318,51 @@ function createExperienceSection(section) {
                 `;
                 contentDiv.appendChild(projectDiv);
             });
+        } else {
+            console.log(`No projects found for ${item.company.en}`);
         }
         
         itemDiv.appendChild(contentDiv);
         experienceDiv.appendChild(itemDiv);
+        
+        console.log(`Finished rendering company ${index}:`, item.company.en);
+    });
+    
+    return experienceDiv;
+}                                        </div>
+                            <div class="security-grid">
+                                ${project.security.map(secItem => `
+                                    <div class="security-item">
+                                        <span class="lang-en">${secItem.en}</span>
+                                        <span class="lang-vi">${secItem.vi}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+                    ${project.achievements ? `
+                        <div class="achievements">
+                            <div class="achievement-title">
+                                <span class="lang-en">Key Achievements:</span>
+                                <span class="lang-vi">Thành tựu chính:</span>
+                            </div>
+                            <div class="achievement-list">
+                                <span class="lang-en">${project.achievements.en}</span>
+                                <span class="lang-vi">${project.achievements.vi}</span>
+                            </div>
+                        </div>
+                    ` : ''}
+                `;
+                contentDiv.appendChild(projectDiv);
+            });
+        } else {
+            console.log(`No projects found for ${item.company.en}`);
+        }
+        
+        itemDiv.appendChild(contentDiv);
+        experienceDiv.appendChild(itemDiv);
+        
+        console.log(`Finished rendering company ${index}:`, item.company.en);
     });
     
     return experienceDiv;
