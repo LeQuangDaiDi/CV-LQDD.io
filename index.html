@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic CV</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- jsPDF Library for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- html2pdf Library (alternative) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body data-lang="en">
     <div class="loading" id="loading">Loading CV...</div>
@@ -17,11 +21,11 @@
                 <span class="dropdown-arrow">▼</span>
             </button>
             <div class="dropdown-content" id="main-dropdown">
-                <button class="dropdown-item" onclick="downloadMainCV('en')">
-                    🇺🇸 English
+                <button class="dropdown-item" onclick="downloadPDF('en')">
+                    🇺🇸 English PDF
                 </button>
-                <button class="dropdown-item" onclick="downloadMainCV('vi')">
-                    🇻🇳 Tiếng Việt
+                <button class="dropdown-item" onclick="downloadPDF('vi')">
+                    🇻🇳 Vietnamese PDF
                 </button>
             </div>
         </div>
@@ -35,6 +39,7 @@
         <!-- CV content will be dynamically generated here -->
     </div>
 
+    <script src="download-data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
